@@ -206,3 +206,46 @@ Stop after the pilot deliverables. Stop again after the full-run deliverables. T
 | Split-half seed | 20260906 | §5.5 |
 | Pilot fraction and seed | 30%, 20260907 | §6 |
 | Bootstrap draws | 2,000 | §5.5 |
+
+---
+
+## Amendment 1 (2026-09-06, after lock, before execution)
+
+Trigger: the implementer's feasibility audit found four silent-failure hazards, six internal inconsistencies, and one disputed [LOCKED] definition. The rulings below are design decisions by the designer. No analysis has run.
+
+**A. Join and key handling**
+
+1. Normalize `resolution_date` to a calendar date (first 10 characters) before any join. Human market rows carry a null `resolution_date`; fill it from the resolution set by (source, id). The 4 market questions with no resolution row are unresolved and drop as §2.2 already requires; report the count.
+2. Combination questions are excluded from every set in this study (see B.1), so no combination key is needed.
+3. **[LOCKED]** `imputed == true` rows are excluded everywhere. In model ranking (§4) and in `DIS`, a model contributes only its non-imputed forecasts. In the test set, a forecaster × target row is dropped if baseline (a) is imputed on that target; report the count. A model with more than 5% imputed rows on the selection set is ineligible to be baseline (a); report the imputed share of every matched model.
+
+**B. Baseline selection**
+
+1. **[LOCKED]** The selection set is restricted to **single questions** (not combination questions): resolved single-question targets in the matched condition minus every human target. Expected 930 targets across 241 questions. Reason: 86% of the unrestricted set is combination questions, a task absent from the test set; the champion should be chosen on the task it is tested on. Report, as a diagnostic only, which model would have won on the unrestricted set.
+2. Tie-break replaced: ties on the selection set are broken toward the lower Brier on the round's combination-question targets. Report if a tie occurs.
+3. Information condition, ruling on §2.3: the human survey saw freeze values on both question families and received no supplied news (paper Appendix D.2, Figures 2 and 3, and §5.1; not Appendices B and I as the spec stated). Matched condition = freeze values, no news. **Both scaffolds qualify**: 17 base models × {zero shot with freeze values, scratchpad with freeze values} = 34 model variants. Baseline (a) is the best of the 34. Baseline (b) is the median across the 34.
+
+**C. Disagreement measure**
+
+1. **[LOCKED]** `DIS` is redefined to exclude scaffold sensitivity: for each target, compute the SD of forecasts across the 17 base models within each scaffold separately, then average the two SDs. The audit's point stands: a single model whose two scaffolds disagree is not benchmark fallibility. Report the SD across all 34 variants as a diagnostic alongside.
+
+**D. Model specification fixes**
+
+1. §5 fallback for H1: question-clustered OLS **without** forecaster fixed effects (GRP is constant within forecaster and would not be identified). Fallback for H3 and H4 keeps forecaster fixed effects; there GRP is absorbed and software will drop it silently, which is correct, so every such table carries the note "GRP absorbed by forecaster fixed effects, not separately reported".
+2. `HZ` enters as log(days), standardized. Note in the H3 and H4 tables that `HZ` and `MKT` are partly redundant because market and dataset horizons come from different distributions.
+3. H4 tables carry a note: `EXT_a = |p_h − 0.5| − CONF_a` by construction, so the `EXT_a` coefficient is the effect of the human's extremity at fixed model confidence and fixed deviation size. Nothing else changes.
+4. `SRC` is descriptive only (coverage tables); it enters no model. §3 is not edited; this line governs.
+5. §5.5 leave-one-out mean is **pooled** across both groups (all other forecasters on the target regardless of group). The own-row share is about 1.8% pooled; the 2.5% figure in §5.5 was approximate and is superseded.
+
+**E. Pilot**
+
+1. **[LOCKED]** The pilot samples 30% of **questions** (not targets), seed 20260907, and carries all their targets, so nesting is preserved. H5 is excluded from the pilot and runs on the full sample only; a 30% pilot leaves too few targets per forecaster for a split-half.
+
+**F. Corrections of stated figures**
+
+1. §2.3 "139 models" is the all-condition count including 9 non-LLM baselines; LLM variants are 130; matched-condition variants are 34.
+2. §8 row count: about 33,500 forecaster × target rows (S about 4,800, P about 28,700), not 310,000. The one-hour tripwire stands.
+3. The paper reports 39 superforecasters; the data has 40 distinct S ids. Footnote this in the report.
+4. Report per-target S forecaster counts (min 3). The H2 superforecaster median is a median of as few as 3 forecasts on some targets; the H2 S-group coefficient must be interpreted with that thinness stated next to it.
+
+All other clauses unchanged.
