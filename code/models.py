@@ -51,21 +51,27 @@ def fit_mixed_crossed(formula, df, want_forecaster=True):
     if want_forecaster:
         vc["forecaster"] = "0 + C(forecaster)"
     t0 = time.time()
-    with warnings.catch_warnings():
-        warnings.simplefilter("ignore")
+    with warnings.catch_warnings(record=True) as caught:
+        warnings.simplefilter("always")
         md = smf.mixedlm(formula, d, groups=d["_g"], re_formula="0", vc_formula=vc)
-        res = md.fit(method="lbfgs", maxiter=200)
+        res = md.fit(method="lbfgs", maxiter=1000)
     elapsed = time.time() - t0
     ok = bool(getattr(res, "converged", False))
+    wmsgs = sorted({str(x.message).strip() for x in caught
+                    if "Convergence" in x.category.__name__
+                    or "boundary" in str(x.message).lower()})
     vcomp = dict(zip(md.exog_vc.names if hasattr(md, "exog_vc") else vc.keys(),
                      np.atleast_1d(res.vcomp)))
     vcomp["residual"] = float(res.scale)
+    note = f"crossed mixed model, converged={ok}, {elapsed:.0f}s"
+    if wmsgs:
+        note += " — optimiser warnings: " + "; ".join(wmsgs)
     return FitResult(
         "mixed", res.params.drop(labels=[c for c in res.params.index
                                          if c.endswith("Var") or " Var" in c],
                                  errors="ignore"),
-        res.conf_int(), f"crossed mixed model, converged={ok}, {elapsed:.0f}s",
-        nobs=int(res.nobs), vc=vcomp), ok
+        res.conf_int(), note,
+        nobs=int(res.nobs), vc=vcomp, extra={"warnings": wmsgs}), ok
 
 
 def fit_ols_cluster(formula, df, cluster="question", absorb_forecaster=False):

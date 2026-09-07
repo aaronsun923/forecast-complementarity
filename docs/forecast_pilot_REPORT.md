@@ -1,6 +1,6 @@
 # ForecastBench pilot — SPEC v1 + Amendment 1
 
-Generated 2026-09-07 00:24:51Z · spec commit `f94cb63` · **pilot only, full sample not run**
+Generated 2026-09-07 01:36:23Z · spec commit `f94cb63` · **pilot only, full sample not run**
 
 Pilot scope per Amendment 1 E.1: a random **30% of questions** (seed 20260907), carrying all of their targets. H5 is excluded from the pilot by the same clause. Deliverables §9 items 1–9 and 11 follow, plus the Amendment 1 diagnostics.
 
@@ -18,7 +18,7 @@ Factual only; SPEC §9 item 12 (interpretation) belongs to the full run.
 | H4 | `EXT_a_z` on `G_a` (core quantity, sign only) | 0.0413 [0.0359, 0.0467] | sign: positive |
 | H4 | `EXT_a_z:DIS_z` (the one locked interaction) | 0.0161 [0.0099, 0.0223] | sign: positive |
 
-All three §3 sign tests pass. All four mixed models converged (no §5 / Amendment 1 D.1 fallback was needed). Runtime 67s.
+All three §3 sign tests pass. All four mixed models converged (no §5 / Amendment 1 D.1 fallback was needed). Runtime 66s.
 
 **Three things the designer should look at before authorising the full run:** (a) the §0 out-of-range human forecasts and the drop-vs-clip ruling; (b) 29% of rows cross 0.5, which limits what the H4 `EXT_a` sign can mean; (c) the H2 superforecaster median hits the clip bound on 51 of 171 targets (30%), so the S encompassing coefficient is estimated partly on clipped values.
 
@@ -286,7 +286,7 @@ Group means of `G_a` × 100, with question-clustered 95% CIs (positive = the hum
 | P | -4.813 | -7.963 | -1.662 | 8465.000 | 49.000 | 499.000 |
 | S | 5.919 | 0.942 | 10.896 | 1421.000 | 49.000 | 40.000 |
 
-Model `G_a ~ GRP + (1|forecaster) + (1|question) + (1|question:target)` — crossed mixed model, converged=True, 7s
+Model `G_a ~ GRP + (1|forecaster) + (1|question) + (1|question:target)` — crossed mixed model, converged=True, 7s — optimiser warnings: The MLE may be on the boundary of the parameter space.
 
 | index | coef | ci_lo | ci_hi |
 |---|---|---|---|
@@ -321,7 +321,7 @@ Superforecaster medians on 9 of 171 pilot targets rest on ≤4 individual foreca
 
 ## 8. H3 — where does the return live? (§9 item 8)
 
-`G_a ~ DIS_z + CONF_a_z + logHZ_z + MKT + GRP` + crossed REs — crossed mixed model, converged=True, 7s
+`G_a ~ DIS_z + CONF_a_z + logHZ_z + MKT + GRP` + crossed REs — crossed mixed model, converged=True, 7s — optimiser warnings: The MLE may be on the boundary of the parameter space.
 
 | index | coef | ci_lo | ci_hi |
 |---|---|---|---|
@@ -349,7 +349,7 @@ Diagnostic — same model with the pre-amendment `DIS_all34`:
 
 ## 9. H4 — does the direction of deviation pay? (§9 item 9)
 
-`G_a ~ EXT_a_z + absD_a_z + DIS_z + CONF_a_z + logHZ_z + MKT + GRP + EXT_a_z:DIS_z` + crossed REs (the single locked interaction, SPEC 5.4) — crossed mixed model, converged=True, 5s
+`G_a ~ EXT_a_z + absD_a_z + DIS_z + CONF_a_z + logHZ_z + MKT + GRP + EXT_a_z:DIS_z` + crossed REs (the single locked interaction, SPEC 5.4) — crossed mixed model, converged=True, 5s — optimiser warnings: The MLE may be on the boundary of the parameter space.
 
 | index | coef | ci_lo | ci_hi |
 |---|---|---|---|
@@ -480,5 +480,5 @@ Clipping the 200 out-of-range rows to [0, 1] instead of dropping them (64 extra 
 
 SPEC §10: the pilot stops here. The full sample has **not** been run. H5 (§9 item 10) is excluded from the pilot by Amendment 1 E.1 and awaits the full run. §9 item 12 (interpretation caveats) belongs to the full run and is not written here.
 
-Total runtime 67s (SPEC §8 tripwire: 1 hour).
+Total runtime 66s (SPEC §8 tripwire: 1 hour).
 
