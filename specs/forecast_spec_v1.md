@@ -249,3 +249,31 @@ Trigger: the implementer's feasibility audit found four silent-failure hazards, 
 4. Report per-target S forecaster counts (min 3). The H2 superforecaster median is a median of as few as 3 forecasts on some targets; the H2 S-group coefficient must be interpreted with that thinness stated next to it.
 
 All other clauses unchanged.
+
+---
+
+## Amendment 2 (2026-09-06, after pilot, before full run)
+
+Trigger: the pilot (SPEC §6 as amended by Amendment 1 E.1; 49 questions, 171 targets, 9,886 rows) was accepted. It surfaced one data defect that no earlier clause anticipated, and two measurement facts that warrant a sensitivity each. The full sample has not been run.
+
+**1. Human forecasts outside [0, 1]**
+
+**[LOCKED]** Human forecasts outside [0, 1] are not probabilities and are excluded from every analysis. Report the count, the number of forecasters affected, and their group.
+
+Clipping to [0, 1] is reported as a **sensitivity only**. It is neither a primary result nor one of the three §7 robustness items, and no conclusion rests on it.
+
+Pilot figures behind this ruling: 200 of 33,534 resolved human rows (0.60%) carry a `p_h` outside [0, 1], all in the public group, across 42 distinct forecasters, ranging to 5.0e8. The public survey asked for a number between 0 and 100 and ForecastBench divided by 100 without cleaning the free-entry field. Left in, `BS_h` is unbounded and mean `G_a` is about −7.5e12 rather than a number in [−1, 1].
+
+**2. H4 on non-crossing rows**
+
+Added after the pilot: H4 is additionally reported on **non-crossing rows only** — rows where `p_h` and `p_a` lie on the same side of 0.5 — as a sensitivity. The pre-registered all-rows H4 remains **primary**.
+
+Reason: 29% of pilot rows cross 0.5, and on those rows `EXT_a` is not an extremization of the model's view, so the all-rows `EXT_a` coefficient is not by itself a clean test of whether extremizing pays.
+
+**3. H2 with tighter clip bounds**
+
+Added after the pilot: H2 is additionally reported with clip bounds **[0.001, 0.999]** as a sensitivity. The pre-registered [0.01, 0.99] bounds (SPEC 5.2, §11) remain **primary**.
+
+Reason: the superforecaster median hit the [0.01, 0.99] bound on 51 of 171 pilot targets (30%), so the S encompassing coefficient is estimated partly on clipped values. The public median hit the bound on 0 targets.
+
+All other clauses unchanged.
