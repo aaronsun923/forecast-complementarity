@@ -510,6 +510,82 @@ The pilot was accepted partly on the ground that its signs were sensible. Two pr
 
 ---
 
+---
+
+<!-- posthoc:start -->
+## Post-hoc diagnostics (not pre-registered)
+
+**Specified after the results were seen (Amendment 3, 2026-09-06). Diagnostic only: no pre-registered model was refitted, no estimate above changes, and nothing in this section is a hypothesis test.** It exists to locate where the two scoring rules disagree, not to decide between them.
+
+The reversal being diagnosed: the H4 core quantity `EXT_a_z` is **+0.02826 [0.02518, 0.03135]** under Brier (§9, primary) and **−0.02190 [−0.03282, −0.01098]** under the log score (§11.7.2), neither interval containing zero. All rows below are the primary analysis rows (33,334), split into quartiles of `EXT_a`.
+
+Quartile cut points of `EXT_a`: -0.4990 / -0.0500 / 0.0200 / 0.1800 / 0.5000.
+
+### Distribution of `G_a` (Brier) by `EXT_a` quartile
+
+| index | q0 | q5 | q25 | q50 | q75 | q95 | q100 | mean | n |
+|---|---|---|---|---|---|---|---|---|---|
+| Q1 | -0.8645 | -0.5156 | -0.2176 | -0.0627 | -0.0100 | 0.2464 | 0.9309 | -0.1019 | 8667.0000 |
+| Q2 | -0.9999 | -0.1836 | -0.0027 | 0.0000 | 0.0004 | 0.0424 | 0.9408 | -0.0256 | 8470.0000 |
+| Q3 | -0.9996 | -0.3701 | -0.0721 | 0.0039 | 0.0665 | 0.2234 | 0.9409 | -0.0225 | 7887.0000 |
+| Q4 | -0.9676 | -0.7645 | -0.5098 | 0.1224 | 0.2491 | 0.3375 | 0.6400 | -0.0949 | 8310.0000 |
+
+### Distribution of `G_log` (log score) by `EXT_a` quartile
+
+| index | q0 | q5 | q25 | q50 | q75 | q95 | q100 | mean | n |
+|---|---|---|---|---|---|---|---|---|---|
+| Q1 | -2.6391 | -1.1939 | -0.5306 | -0.2029 | -0.0892 | 0.6006 | 3.4012 | -0.2710 | 8667.0000 |
+| Q2 | -4.5951 | -0.3716 | -0.0311 | 0.0000 | 0.0102 | 0.1011 | 3.4965 | -0.0872 | 8470.0000 |
+| Q3 | -4.5849 | -0.8755 | -0.1613 | 0.0518 | 0.1525 | 0.4618 | 3.4965 | -0.0844 | 7887.0000 |
+| Q4 | -4.4067 | -3.9120 | -1.3581 | 0.3466 | 0.5921 | 0.8109 | 1.5994 | -0.4651 | 8310.0000 |
+
+### Confidently-wrong share by `EXT_a` quartile
+
+A row counts as confidently wrong when the forecast is at or beyond 0.9 on the wrong side of the outcome: `p >= 0.9` with `o = 0`, or `p <= 0.1` with `o = 1`. Shares are proportions of rows in the quartile.
+
+| EXT_q | EXT_a_min | EXT_a_max | n | human_conf_wrong | baseline_a_conf_wrong | ratio_human_over_baseline |
+|---|---|---|---|---|---|---|
+| Q1 | -0.4990 | -0.0500 | 8667 | 0.0088 | 0.0198 | 0.4419 |
+| Q2 | -0.0500 | 0.0200 | 8470 | 0.0314 | 0.0089 | 3.5467 |
+| Q3 | 0.0200 | 0.1800 | 7887 | 0.0364 | 0.0103 | 3.5432 |
+| Q4 | 0.1800 | 0.5000 | 8310 | 0.2351 | 0.0000 | — |
+
+### The same shares by group
+
+| GRP | EXT_q | n | human_conf_wrong | baseline_a_conf_wrong |
+|---|---|---|---|---|
+| P | Q1 | 8082 | 0.0094 | 0.0173 |
+| P | Q2 | 6479 | 0.0398 | 0.0088 |
+| P | Q3 | 6272 | 0.0430 | 0.0053 |
+| P | Q4 | 7704 | 0.2504 | 0.0000 |
+| S | Q1 | 585 | 0.0000 | 0.0547 |
+| S | Q2 | 1991 | 0.0040 | 0.0090 |
+| S | Q3 | 1615 | 0.0105 | 0.0297 |
+| S | Q4 | 606 | 0.0413 | 0.0000 |
+
+Group totals across all quartiles:
+
+| GRP | n | human_conf_wrong | baseline_a_conf_wrong |
+|---|---|---|---|
+| P | 28537 | 0.0888 | 0.0081 |
+| S | 4797 | 0.0104 | 0.0204 |
+
+![Post-hoc EXT quartile diagnostic](figures/full_posthoc_ext_quartiles.png)
+
+### What the tables show
+
+**The reversal is a Q1/Q4 swap.** Under Brier the most-extremizing quartile Q4 (mean `G_a` -0.0949) is *better* than the least-extremizing Q1 (-0.1019). Under the log score the order flips: Q4 (mean `G_log` -0.4651) is far *worse* than Q1 (-0.2710). The two middle quartiles agree under both rules (Q2 and Q3 are the best two either way). That single swap at the extremes is the reversal seen in the fitted coefficients, visible here without any model.
+
+**The mechanism is a thin tail of confident errors.** The human confidently-wrong share rises monotonically across quartiles, 0.88% → 3.14% → 3.64% → **23.51%** in Q4. Baseline (a) on the same rows goes the other way, 1.98% → 0.00%: by construction the model is never confidently wrong in Q4, because Q4 is where the human is far more extreme than a model that was not extreme to begin with.
+
+**The two groups behave oppositely.** Superforecasters are confidently wrong on 1.04% of their rows against baseline (a)'s 2.04% on those same rows — they are confidently wrong *less* often than the model. Public forecasters are confidently wrong on 8.88% against 0.81%, roughly 11× the model's rate. The log-score penalty therefore falls overwhelmingly on the public group, and the negative log-score `EXT_a` coefficient should be read with that in mind.
+
+The log score is unbounded below and the Brier score is bounded, so a single confident error costs far more under the log score than any number of small improvements can repay. Read the two coefficient signs together with these tables rather than separately. This section does not establish which rule the study should prefer; §5.4 and §7.2 are unamended and the primary H4 remains the Brier fit.
+
+<!-- posthoc:end -->
+
+---
+
 ## Stop
 
 SPEC §10: the full run stops here. The designer decides what, if anything, follows.

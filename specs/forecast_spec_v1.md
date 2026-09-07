@@ -277,3 +277,29 @@ Added after the pilot: H2 is additionally reported with clip bounds **[0.001, 0.
 Reason: the superforecaster median hit the [0.01, 0.99] bound on 51 of 171 pilot targets (30%), so the S encompassing coefficient is estimated partly on clipped values. The public median hit the bound on 0 targets.
 
 All other clauses unchanged.
+
+---
+
+## Amendment 3 (2026-09-06, after results, diagnostics only, no estimate changes)
+
+Trigger: the full run returned a sign reversal on the H4 core quantity between the two scoring rules. `EXT_a_z` is +0.028 [0.025, 0.031] under Brier (§9, primary) and −0.022 [−0.033, −0.011] under the log score (§7.2 robustness), and neither interval contains zero. Extremizing relative to the model appears to pay under one proper scoring rule and to cost under the other.
+
+This amendment adds a **diagnostic only**. No pre-registered model is refitted, no estimate changes, and nothing here is a hypothesis test. Its purpose is to show *where in the data* the two scoring rules disagree, so the disagreement can be described accurately rather than adjudicated by choosing a rule.
+
+**Diagnostic**
+
+On the primary analysis rows, by quartile of `EXT_a`:
+
+1. The distribution of `G_a` and of `G_log` — quantiles and mean.
+2. The share of rows on which the human forecast is at or beyond 0.9 on the wrong side of the outcome, defined as `p_h >= 0.9 and o = 0`, or `p_h <= 0.1 and o = 1`.
+3. The same share computed for baseline (a), i.e. `p_a >= 0.9 and o = 0`, or `p_a <= 0.1 and o = 1`, on the same rows.
+
+Both shares in items 2 and 3 are additionally reported by group (S and P).
+
+**Reporting**
+
+Results go in `docs/forecast_full_REPORT.md` as a section headed **"Post-hoc diagnostics (not pre-registered)"**, with one figure. The section states plainly that it was specified after the results were seen, and it carries no inferential claim.
+
+Rationale: the log score is unbounded below and the Brier score is not, so a forecast that is confident and wrong costs far more under the log score. If the confidently-wrong share rises with `EXT_a`, the reversal is a property of the scoring rules meeting a thin tail of confident errors, not two contradictory findings about human behaviour. The diagnostic is designed to make that visible; it does not decide which rule the study should prefer. That remains the designer's call, and neither §5.4 nor §7.2 is amended.
+
+All other clauses unchanged.
