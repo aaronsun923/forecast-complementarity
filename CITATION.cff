@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite it as below, and cite the paper DOI."
+title: "forecast-complementarity: analysis code"
+type: software
+authors:
+  - family-names: Sun
+    given-names: Aaron
+    orcid: "https://orcid.org/0009-0000-2412-4727"
+    affiliation: "San Marino High School"
+license: MIT
+repository-code: "https://github.com/aaronsun923/forecast-complementarity"
+doi: 10.5281/zenodo.22600832
+references:
+  - type: article
+    title: "Where the Benchmark Can Err: Human Deviations from Model Forecasts and Their Return"
+    doi: 10.5281/zenodo.22589676
+  - type: article
+    title: "Sharper, Not Safer: The Direction of Human Deviations from Engine Play"
+    doi: 10.5281/zenodo.22267000
