@@ -317,6 +317,92 @@ Refit with the single highest-`Q` variant excluded (distinct from the unflagged 
 
 ---
 
+<!-- amendment2:start -->
+## Post-results diagnostics — reference curve (Amendment 2, not pre-registered)
+
+**Specified after the results were seen (Amendment 2, 2026-09-08). Diagnostic only: no pre-registered estimate is refit or changed, and nothing reported above is altered.** H6, H7, H8 and the five §6 robustness items stand exactly as reported.
+
+The H6 curves show that adding a human term improves on a model and that the improvement grows as the model worsens. That slope is close to mechanical: any predictor that is not pure noise improves more on a worse model. The reference curve replaces the human median, for each variant `m`, with the **leave-one-out median of the other 33 variants** on that target, and recomputes the same two y quantities against the same `Q_m`, with identical folds, seed, clipping and target sets.
+
+Reference coverage: every one of the 34 variants has a reference value on all of its retained targets (minimum 10 contributing variants required).
+
+### Slopes: human vs reference
+
+| quantity | curve | n | slope | analytic_lo | analytic_hi |
+|---|---|---|---|---|---|
+| β (encompassing) | human S | 34 | 0.4675 | -0.3411 | 1.2762 |
+| β (encompassing) | human P | 34 | 3.1250 | 1.1888 | 5.0613 |
+| β (encompassing) | reference | 34 | 5.2892 | 1.1618 | 9.4166 |
+| cross-fitted log-score gain | human S | 34 | 1.0957 | 0.6581 | 1.5332 |
+| cross-fitted log-score gain | human P | 34 | 1.0145 | 0.6761 | 1.3530 |
+| cross-fitted log-score gain | reference | 34 | 1.2076 | 0.8766 | 1.5386 |
+
+The analytic base-model-clustered interval is shown for orientation only; the inferential quantity of this section is the paired difference below.
+
+### Figures
+
+![beta vs reference](figures/v2_full_amd2_beta_ref.png)
+
+![gain vs reference](figures/v2_full_amd2_gain_ref.png)
+
+Triangles and the dashed grey line are the reference curve; dotted vertical lines mark the three evaluation points. The §7 item 3 and item 4 figures are unchanged and remain the pre-registered versions.
+
+### Vertical difference, human minus reference, at three points on Q
+
+Differences are computed **inside each bootstrap draw** — human and reference are estimated on the same resampled questions, both stage-2 lines are refit, and both are evaluated at the same `Q` — so the interval reflects the paired structure. 2000 draws, seed 20260908, question-level cluster resampling, `Q` held fixed.
+
+Evaluation points: min `Q` = 0.1616, median `Q` = 0.2030, max `Q` = 0.3974.
+
+**β (encompassing):**
+
+| group | at | difference | ci_lo | ci_hi | human_above_reference |
+|---|---|---|---|---|---|
+| S | min Q (0.1616) | -0.6775 | -1.6998 | 0.3724 | no |
+| S | median Q (0.2030) | -0.8768 | -1.8562 | 0.1353 | no |
+| S | max Q (0.3974) | -1.8140 | -2.7656 | -0.8731 | no |
+| P | min Q (0.1616) | -1.0753 | -2.1697 | -0.2315 | no |
+| P | median Q (0.2030) | -1.1648 | -2.2304 | -0.3500 | no |
+| P | max Q (0.3974) | -1.5855 | -2.6178 | -0.8036 | no |
+
+**cross-fitted log-score gain:**
+
+| group | at | difference | ci_lo | ci_hi | human_above_reference |
+|---|---|---|---|---|---|
+| S | min Q (0.1616) | 0.1057 | 0.0643 | 0.1504 | yes |
+| S | median Q (0.2030) | 0.1011 | 0.0614 | 0.1455 | yes |
+| S | max Q (0.3974) | 0.0793 | 0.0412 | 0.1397 | yes |
+| P | min Q (0.1616) | 0.0136 | -0.0162 | 0.0551 | no |
+| P | median Q (0.2030) | 0.0056 | -0.0313 | 0.0486 | no |
+| P | max Q (0.3974) | -0.0319 | -0.1138 | 0.0365 | no |
+
+### Reading (locked in advance by Amendment 2)
+
+The claim that the human carries information the models do not is supported **only where the human curve lies above the reference curve**. Where it does not, the human's contribution at that benchmark quality **is not distinguishable from what another model-like source contributes**.
+
+- **β, group S:** human **not** distinguishable from reference at any of the three points — at these benchmark qualities the human's contribution is not distinguishable from what another model-like source contributes.
+- **β, group P:** human **not** distinguishable from reference at any of the three points — at these benchmark qualities the human's contribution is not distinguishable from what another model-like source contributes.
+- **log-score gain, group S:** human above reference at all three points — the claim is supported across the observed range of Q.
+- **log-score gain, group P:** human **not** distinguishable from reference at any of the three points — at these benchmark qualities the human's contribution is not distinguishable from what another model-like source contributes.
+
+### Verification that the human side was not altered
+
+The human quantities were recomputed inside the paired loop solely to make the pairing exact. They reproduce the stored full-run bootstrap draws:
+
+| series | max |difference| vs stored draws |
+|---|---|
+| beta S | 0.00e+00 |
+| beta P | 0.00e+00 |
+| gain S | 0.00e+00 |
+| gain P | 0.00e+00 |
+
+Failed sub-fits across both paired bootstraps: β 0, gain 0 of 204000 attempted in each.
+
+Runtime 1213s.
+
+<!-- amendment2:end -->
+
+---
+
 ## Stop
 
 SPEC §10 discipline: delivery stops here. Nothing beyond §7 is inferred.
