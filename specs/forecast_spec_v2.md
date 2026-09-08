@@ -1,10 +1,10 @@
 # SPEC v2: Human Information Beyond the Model as a Function of Benchmark Quality
 
-Status: LOCKED 2026-09-07 on confirmation of §8. The lock takes effect at the commit that adds this file to `forecast-complementarity`, which must precede any analysis run.
+Status: LOCKED 2026-09-08, §8 parameters confirmed by the designer. The lock takes effect at the commit that adds this file to `forecast-complementarity`, which must precede any analysis run.
 
 ## 0. Note to the implementer
 
-Same rules as SPEC v1: [LOCKED] parameters are design decisions; disagreement is reported, not patched. Reuse the v1 data frame, keys, exclusions, and helpers exactly (Amendments 1 and 2 of v1 apply in full). Do not recompute anything v1 already computed. Work in `~/Desktop/forecast-complementarity/`.
+Same rules as SPEC v1: [LOCKED] parameters are design decisions; disagreement is reported, not patched. Reuse the v1 data frame, keys, exclusions, and helpers exactly (Amendments 1 and 2 of v1 apply in full). Do not recompute anything v1 already computed. Code and reports live in `~/Desktop/forecast-complementarity/`; data is read from `~/Desktop/forecast-study/data/` through `config.py`'s `STUDY_ROOT`, as in v1.
 
 ## 1. Objective
 
@@ -26,13 +26,21 @@ Per variant m:
 | `Q_m` | mean Brier of variant m on the v1 selection set (single questions, complement of human targets, imputed rows excluded). Lower is better. Measured out of sample relative to the test set |
 | `β_m,g` | the v1 H2 encompassing coefficient with variant m as the model and group g's median as the human: `o ~ logit(p_m) + [logit(p_h_g) − logit(p_m)]`, question-clustered SEs, clip [0.01, 0.99]. Same code path as v1 H2 |
 | `ε_m,g` | the v1 H4 `EXT` coefficient with variant m as the model, all covariates as in v1 H4, group g only. Same code path as v1 H4 |
-| `G_m,g` | mean human gain over variant m, by group. Reported as a descriptive curve only, with the statement that it is mechanical: `G_m,g = BS_m(test) − BS_g(test)` and the second term does not vary with m |
+| `G_m,g` | mean human gain over variant m, by group. Reported as a descriptive curve only. **[LOCKED]** It is close to an identity: `G_m,g = BS_m(test) − BS_g(test)`, the second term does not vary with m, and `BS_m(test)` is highly correlated with `Q_m` because both are that variant's Brier on different question sets. Any figure showing it must carry that statement in its caption, not only in this table |
 
 `Q_m` is the x axis. `β` and `ε` are the y axes.
 
 ## 4. Hypotheses
 
-Units are variants (n = 34), which nest in base models (n = 17). **[LOCKED]** All standard errors cluster by base model.
+Units are variants (n = 34), which nest in base models (n = 17). The 34 points are not independent observations: every `β_m` and `ε_m` is estimated on the same 578 targets, the same human medians, and the same outcomes, so outcome noise is shared across all 34. Clustering by base model does not remove that sharing.
+
+Inference differs between H6 and H7 because the two stage-1 estimators differ by three orders of magnitude in cost (a logistic fit for `β`, a mixed model for `ε`; one full pass over 34 variants takes about 22 minutes, almost all of it `ε`).
+
+- **[LOCKED]** H6: question-level cluster bootstrap. Resample the 162 questions with replacement (seed 20260908), recompute every `β_m,g` on the resampled data for all 34 variants, refit the stage-2 slope, repeat 2,000 times, report the 2.5 and 97.5 percentiles. This propagates the shared outcome noise, which clustering at stage 2 cannot.
+- **[LOCKED]** H7: stage-2 wild cluster bootstrap over the 17 base models (Rademacher weights, 2,000 draws, seed 20260908), applied to the 34 precomputed `ε_m,g` points. Regenerating `ε` inside each draw would take about 30 days and is not done. State in the H7 table that its interval conditions on the stage-1 estimates and is therefore narrower than H6's.
+- The analytic slope with standard errors clustered by base model is reported alongside both, labeled as the narrowest and least appropriate interval; 17 clusters understate uncertainty.
+
+**[LOCKED]** `Q_m` is held fixed across bootstrap draws. It is measured on the selection set, which contains no test targets and is not resampled.
 
 ### 4.1 H6: does human information beyond the model shrink as the model improves?
 
@@ -42,7 +50,7 @@ Units are variants (n = 34), which nest in base models (n = 17). **[LOCKED]** Al
 
 Core quantity: the slope on `Q_m`. The expectation is positive (worse models leave more for the human to add), pre-registered two-sided.
 
-Descriptive extrapolation, reported without inference: the value of `Q` at which the fitted `β` reaches zero, with the interval implied by the slope's 95% CI. If the fitted line does not reach zero within the observed range of `Q`, say so and do not extrapolate beyond the range.
+Descriptive extrapolation, reported without inference: the value of `Q` at which the fitted `β` reaches zero. **[LOCKED]** Compute the zero crossing within each bootstrap draw and report the 2.5 and 97.5 percentiles across draws, so the interval comes from the same resampling as the slope. If the fitted line does not reach zero within the observed range of `Q`, say so and do not extrapolate beyond the range. Report the share of draws in which the crossing falls outside the observed range.
 
 ### 4.2 H7: does the return to extremizing depend on the model's quality?
 
@@ -54,7 +62,9 @@ Core quantity: the slope. Two-sided, no expected direction pre-registered.
 
 ### 4.3 H8: is the human information the same information across benchmarks?
 
-For each group, compute the per-target human-minus-model term `logit(p_h_g) − logit(p_m)` for every variant m. Report the mean pairwise correlation across variants of this term (578 targets). A high correlation means the human median disagrees with all models in the same places, i.e. the information is about the questions, not about any one model's weakness. Descriptive; no test.
+For each group, compute the per-target human-minus-model term `logit(p_h_g) − logit(p_m)` for every variant m. Report the mean pairwise correlation across variants of this term (578 targets). This correlation is mechanically inflated because every term shares `logit(p_h_g)`. **[LOCKED]** Report next to it the reference quantity: the mean pairwise correlation across variants of `logit(p_m)` itself, and the standard deviation of `logit(p_h_g)` for each group.
+
+**[LOCKED]** Report these numbers and draw no conclusion from them. A preliminary calculation gives about 0.77 for superforecasters, 0.34 for the public, against 0.59 for the models alone. The two groups straddle the reference in opposite directions, which is what a shared-component artifact looks like rather than a difference in where the groups disagree with models: the statistic mixes the variance of the human median (which differs sharply between groups) with the models' mutual correlation. H8 is a reported quantity, not evidence for or against anything.
 
 **[LOCKED]** No other hypotheses. No per-forecaster analysis: per-forecaster gain differs across benchmarks only through the mechanical term.
 
@@ -62,10 +72,13 @@ For each group, compute the per-target human-minus-model term `logit(p_h_g) − 
 
 **[LOCKED]** Same pilot subset as v1 (30% of questions, seed 20260907). Run H6 and H7 on it. Deliver §7 for the pilot. Stop. Full run waits for the designer.
 
-## 6. Robustness (two items only)
+## 6. Robustness (five items only)
 
 1. `Q_m` measured on the round's combination-question targets instead of the single-question selection set; rerun H6 and H7.
-2. Exclude the two Claude-2.1 variants (imputed share above 5% in v1); rerun H6 and H7 on 32 variants.
+2. Exclude both Claude-2.1 variants and rerun H6 and H7 on 32 variants. The exclusion is at the base-model level: only the scratchpad variant exceeds the v1 5% imputed threshold (about 5.05%); the zero-shot variant is at 0% and was eligible in v1. Both are dropped so the pair is treated consistently.
+3. Leverage. `Q_m` is tightly clustered (24 of 34 variants between 0.176 and 0.211) with one far outlier (GPT-3.5-Turbo zero shot at about 0.397, 0.11 clear of the next worst, and not stabilized by its scaffold partner). Report leverage and Cook's distance for every point, and rerun H6 and H7 with the highest-`Q` variant excluded. If the slope's sign depends on that one point, the curve is reported as driven by a single variant.
+4. A scale-free y for H6. `β_m` is not directly comparable across variants: the variance of the human-minus-model term grows as the model worsens, and the coefficient's scale moves with it, so the curve could be tracing variance rather than information. Replace `β_m,g` with the out-of-sample improvement in mean log score from adding the human term to the model, cross-fitted in 5 folds by question (seed 20260908), and rerun H6 with the same bootstrap. This is the heaviest computation in the SPEC (2,000 draws × 34 variants × 2 groups × 5 folds of a small logistic fit). If it exceeds one hour, stop and report rather than reducing the draws. The H6 bootstrap itself is about 45 minutes on measured per-fit times and is also subject to the one-hour tripwire. The H6 conclusion stands only if the two curves agree in sign; if they disagree, report that the `β` curve is not interpretable as information.
+5. H7 under the log score. v1 found the `EXT` coefficient positive under Brier and negative under the log score. Rerun H7 with the v1 §7.2 log-score gain as the dependent variable of the per-variant `EXT` fits. Interpret only the part of the two H7 curves where the signs agree.
 
 **[LOCKED]** No other versions.
 
@@ -74,11 +87,12 @@ For each group, compute the per-target human-minus-model term `logit(p_h_g) − 
 1. Environment.
 2. Per-variant table: base model, scaffold, `Q_m`, imputed count dropped, `β_m,S`, `β_m,P` with CIs, `ε_m,S`, `ε_m,P` with CIs, `G_m,S`, `G_m,P`.
 3. Figure: `β` against `Q` by group, one point per variant, both scaffolds of the same base model joined by a line, fitted slope with CI band.
-4. Figure: `ε` against `Q`, same layout.
+4. Figure: `ε` against `Q`, same layout. Both figures mark the points flagged by the §6 leverage check.
+   - **[LOCKED]** Every reported quantity is computed on that variant's own retained targets. Twenty-eight variants keep all 578; six lose imputed targets (worst case 545). Report the target count next to every `β` and `ε`, and note that the y values are not computed on identical target sets across the x axis. No reweighting is applied for this.
 5. H6 slopes and the descriptive extrapolation.
 6. H7 slopes.
-7. H8 mean pairwise correlation by group.
-8. The two §6 robustness items.
+7. H8 mean pairwise correlation by group, reported next to the reference quantity (mean pairwise correlation of `logit(p_m)` across variants).
+8. The five §6 robustness items.
 9. A statement of what limits the reading: 17 independent base models; all from mid-2024; the two scaffolds of one base model are not independent; `Q` is measured on a different question set from the test set.
 
 ## 8. Parameters awaiting the designer's confirmation
@@ -86,8 +100,8 @@ For each group, compute the per-target human-minus-model term `logit(p_h_g) − 
 | Parameter | Proposed value | Location |
 |---|---|---|
 | Quality measure | Brier on the v1 single-question selection set | §3 |
-| Clustering | by base model (17) | §4 |
+| Primary inference | H6 question-level cluster bootstrap; H7 stage-2 wild cluster bootstrap over base models; both 2,000 draws, seed 20260908; analytic SE reported alongside | §4 |
 | Weighting | inverse variance | §4.1, §4.2 |
 | Extrapolation | descriptive only, within observed range | §4.1 |
 | Pilot subset | reuse v1's | §5 |
-| Robustness | combination-set Q; drop Claude-2.1 | §6 |
+| Robustness | combination-set Q; drop Claude-2.1; leverage and drop-highest-Q; scale-free log-score y for H6; log-score H7 | §6 |
