@@ -105,3 +105,37 @@ For each group, compute the per-target human-minus-model term `logit(p_h_g) − 
 | Extrapolation | descriptive only, within observed range | §4.1 |
 | Pilot subset | reuse v1's | §5 |
 | Robustness | combination-set Q; drop Claude-2.1; leverage and drop-highest-Q; scale-free log-score y for H6; log-score H7 | §6 |
+
+---
+
+## Amendment 1 (2026-09-08, after pilot, before full run)
+
+Trigger: the SPEC v2 pilot (§5; 49 questions, 171 targets, 34 variants) ran clean and returned H6 slopes in the pre-registered direction for both groups, with neither distinguishable from zero under the primary bootstrap. Two problems in the inference and reporting apparatus surfaced, and one point was found to dominate the x axis. The rulings below change **inference and reporting only. No hypothesis, band, or quantity is redefined.**
+
+**1. Leverage rule. [LOCKED]**
+
+A stage-2 point is flagged if `leverage > 2p/n` **or** `Cook's distance > 4/n`, where `p` is the number of stage-2 parameters and `n` the number of variants in that fit. The rule is applied mechanically and is fixed here, before the full run, so it is not chosen after seeing which point it catches. At `p = 2`, `n = 34` both thresholds equal `0.1176`.
+
+The §6 item 3 refit on unflagged points only is a **co-primary table for H6 and H7**. It is reported immediately after the all-points table for each hypothesis, not at the end of the report with the other robustness items.
+
+**An H6 or H7 conclusion stands only if the slope keeps its sign with flagged points removed.** If the sign does not survive, the result is reported as driven by extreme points and **no directional claim is made**.
+
+Pilot motivation, recorded so the rule's origin is auditable. `Q_m` is not merely skewed. Thirty-two of the 34 variants sit in a narrow band, `Q` from 0.1616 to 0.2642 (width 0.103), with two isolated points at the right edge: 0.2841, then 0.3974 a further 0.113 clear of it. In the pilot's four stage-2 fits the single variant `GPT-3.5-Turbo-0125 (zero shot with freeze values)` at `Q = 0.3974` carried a leverage of 0.605 to 0.690 — that is, `h_ii` of roughly two thirds on the 0-to-1 scale, and 30% to 35% of the total leverage, which sums to `p = 2` — and reached a Cook's distance of **3.5693** in the public `β` fit, far past any conventional threshold. The pilot used a looser leverage screen (`3 × mean leverage` = 0.1765); the rule locked above is the more inclusive one and supersedes it.
+
+**2. H7 inference. [LOCKED]**
+
+The stage-2 wild cluster bootstrap specified in §4 **conditions on the stage-1 `ε` estimates and is not a valid interval for H7.** It is replaced.
+
+Build a fast inner-loop estimator for `ε`: OLS with forecaster fixed effects and question-clustered standard errors. This is the estimator SPEC v1 §5 and v1 Amendment 1 D.1 already name as the sanctioned fallback for H3 and H4, so it is not a new specification.
+
+Validate it against the v1 mixed-model point estimates **across all 34 variants**, and report the maximum absolute difference in the coefficient and in its standard error.
+
+Then run **the same question-level cluster bootstrap as H6**: resample the questions with replacement, recompute every `ε_m,g` on the resampled data for all 34 variants, refit the stage-2 slope, 2,000 draws, seed 20260908.
+
+If the validation shows a material discrepancy, **or** the runtime exceeds one hour, **stop and report**. In that case H7 is demoted to descriptive, reported with **no interval**, and the H7 figure carries that statement.
+
+**3. Reporting. [LOCKED]**
+
+Every `ε` table carries a **per-variant column** recording whether that variant's mixed-model fit raised the optimiser boundary warning. An aggregate count is not sufficient. The pilot reported these in aggregate only; that is corrected here.
+
+All other clauses unchanged.
