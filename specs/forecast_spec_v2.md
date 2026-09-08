@@ -139,3 +139,30 @@ If the validation shows a material discrepancy, **or** the runtime exceeds one h
 Every `ε` table carries a **per-variant column** recording whether that variant's mixed-model fit raised the optimiser boundary warning. An aggregate count is not sufficient. The pilot reported these in aggregate only; that is corrected here.
 
 All other clauses unchanged.
+
+---
+
+## Amendment 2 (2026-09-08, after results, diagnostics only, no estimate changes)
+
+Trigger: the full run returned H6 curves that are positive across the whole observed range of `Q` and rise as the model worsens. The cross-fitted out-of-sample log-score gain of §6 item 4 is positive on **all 34 variants for both groups** (superforecasters, per-variant gain 0.0731 to 0.2978, median 0.1713; public, 0.0087 to 0.1857, median 0.0750), with slopes on `Q` of +1.0957 [0.8167, 1.4223] and +1.0145 [0.7050, 1.3193]. That pattern is what the reference curve below is designed to interrogate.
+
+**Reference curve. [LOCKED]**
+
+The H6 curves show that adding a human term improves on a model, and that the improvement grows as the model worsens. **That slope is close to mechanical: any predictor that is not pure noise improves more on a worse model.** To establish that what the human adds is not simply what any additional forecaster-like source would add, compute a reference curve.
+
+For each variant `m`, replace the human median with **the median forecast of the other 33 variants on that target**, and compute the same two y quantities against the same `Q_m`:
+
+1. the encompassing coefficient (the §3 `β` estimator), and
+2. the cross-fitted out-of-sample log-score gain of §6 item 4,
+
+using the **identical folds, seed, clipping, and target sets** as the corresponding human quantities. Nothing else about either estimator changes.
+
+Report both reference curves **on the same figures as the human curves**.
+
+Report the **vertical difference between the human and reference curves** at the minimum, median, and maximum observed `Q`, and at each of those three points report the **question-level cluster bootstrap interval for that difference**, 2,000 draws, seed 20260908 — the same bootstrap as H6, with the difference computed inside each draw so the interval reflects the paired structure.
+
+**The reading is locked in advance.** The claim that the human carries information the models do not is supported **only where the human curve lies above the reference curve**. Where it does not, the section reports that the human's contribution at that benchmark quality **is not distinguishable from what another model-like source contributes**.
+
+This amendment adds a diagnostic. **No pre-registered estimate is refit or changed**; H6, H7, H8 and the five §6 robustness items stand exactly as reported.
+
+All other clauses unchanged.
