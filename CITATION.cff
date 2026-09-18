@@ -17,3 +17,6 @@ references:
   - type: article
     title: "Sharper, Not Safer: The Direction of Human Deviations from Engine Play"
     doi: 10.5281/zenodo.22267000
+  - type: report
+    title: "Measuring What a Human Adds to a Machine Baseline: A Problem Statement"
+    doi: 10.5281/zenodo.22822929
