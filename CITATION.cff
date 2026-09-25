@@ -13,10 +13,19 @@ doi: 10.5281/zenodo.22600832
 references:
   - type: article
     title: "Where the Benchmark Can Err: Human Deviations from Model Forecasts and Their Return"
+    authors:
+      - family-names: Sun
+        given-names: Aaron
     doi: 10.5281/zenodo.22589676
   - type: article
     title: "Sharper, Not Safer: The Direction of Human Deviations from Engine Play"
+    authors:
+      - family-names: Sun
+        given-names: Aaron
     doi: 10.5281/zenodo.22267000
   - type: report
     title: "Measuring What a Human Adds to a Machine Baseline: A Problem Statement"
+    authors:
+      - family-names: Sun
+        given-names: Aaron
     doi: 10.5281/zenodo.22822929
