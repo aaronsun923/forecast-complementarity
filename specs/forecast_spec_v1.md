@@ -303,3 +303,9 @@ Results go in `docs/forecast_full_REPORT.md` as a section headed **"Post-hoc dia
 Rationale: the log score is unbounded below and the Brier score is not, so a forecast that is confident and wrong costs far more under the log score. If the confidently-wrong share rises with `EXT_a`, the reversal is a property of the scoring rules meeting a thin tail of confident errors, not two contradictory findings about human behaviour. The diagnostic is designed to make that visible; it does not decide which rule the study should prefer. That remains the designer's call, and neither §5.4 nor §7.2 is amended.
 
 All other clauses unchanged.
+
+---
+
+## Amendment 4 (2026-09-30, post-results)
+
+**Amendment 4 (post-results, 2026-09-30).** The locked H5 split assigned targets to halves. Targets of the same question at different horizons often share an outcome and a forecaster's judgment, so a target-level split places one judgment in both halves and inflates the split-half r. This amendment adds a question-level split: every target of a question goes to the same half. Primary H5 estimate from this amendment on: question-level split, one random assignment of the 162 questions with seed 20260906, same leave-one-out target demeaning, same 2,000-draw forecaster bootstrap for the CI, Pearson primary and Spearman reported. A forecaster enters only if they have at least one target in each half; the number excluded is reported per group. Descriptive only: the distribution of r (median, 2.5th and 97.5th percentiles) over 1,000 question-level splits (seeds 1..1000), to show split dependence. The target-level result (0.78 / 0.64) remains reported as the originally locked estimate. The paper will lead with the question-level estimate whatever its value. No other quantity changes.
