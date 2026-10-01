@@ -273,7 +273,7 @@ def ref_fig(kind, ycol_s, ycol_p, yref, ylab, fname, title):
         ax.set_title(f"group {g}: human {fh['slope']:+.3f} vs reference "
                      f"{fr['slope']:+.3f}", fontsize=10)
         ax.legend(fontsize=7.5, loc="best")
-    fig.suptitle(title + "  —  post-results diagnostic (Amendment 2)", fontsize=11)
+    fig.suptitle(title + " (post-results diagnostic, Amendment 2)", fontsize=11)
     fig.tight_layout(); fig.savefig(CFG.FIGDIR / fname, dpi=150); plt.close(fig)
 
 

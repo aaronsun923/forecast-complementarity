@@ -592,3 +592,50 @@ SPEC §10: the full run stops here. The designer decides what, if anything, foll
 
 Total runtime 1168s (SPEC §8 tripwire: 1 hour).
 
+---
+
+## Amendment 4: H5 question-level split
+
+Specified after the results were seen (SPEC v1 Amendment 4, commit `c4063e1`). The locked H5 split in §10 assigned targets to halves. Targets of one question at different horizons often share an outcome and a forecaster's judgment, so that split can place one judgment in both halves. Here every target of a question goes to the same half. Leave-one-out demeaning (pooled, Amendment 1 D.5), the 2,000-draw forecaster bootstrap and its seed are unchanged. The target-level result in §10 remains the originally locked estimate.
+
+Check: the locked target-level split recomputed from the stored frame gives S 0.7818, P 0.6400, matching §10.
+
+**Primary.** One random assignment of the 162 questions, seed 20260906 (81 questions in half A, 81 in half B). A forecaster enters only with at least one target in each half.
+
+| group | n_included | n_excluded | pearson_r | ci_lo | ci_hi | spearman_r | min_targets_in_smaller_half | target_level_r_locked |
+|---|---|---|---|---|---|---|---|---|
+| S | 39 | 1 | 0.2702 | -0.1040 | 0.5249 | 0.2294 | 15 | 0.7818 |
+| P | 500 | 0 | 0.2151 | 0.1310 | 0.2960 | 0.2157 | 3 | 0.6400 |
+
+**Split dependence (descriptive only).** Pearson r over 1,000 question-level splits, seeds 1 to 1,000. `share_below_locked_target_r` is the share of splits whose r falls below the locked target-level r for that group; `max_excluded` is the largest number of forecasters excluded in any split.
+
+| group | median | p2_5 | p97_5 | min | max | share_below_locked_target_r | max_excluded |
+|---|---|---|---|---|---|---|---|
+| S | 0.3751 | -0.4477 | 0.7813 | -0.5315 | 0.8487 | 0.9750 | 1 |
+| P | 0.2294 | 0.1601 | 0.2929 | 0.0915 | 0.3418 | 1.0000 | 1 |
+
+![H5 question-level split](figures/full_h5_question_split.png)
+
+---
+
+## Boundary components (variance at zero)
+
+Added for the second review. For every mixed model reported under SPEC v1 (full run: H1, H3 primary and sensitivities, H4 primary and sensitivities; the pilot fits, including the two pilot refits in the reporting note) and SPEC v2 (the 136 eps fits: 34 variants, two groups, Brier and log score), the estimated variance of each random intercept and of the residual.
+
+No fit object was stored, so each model was refitted with the stored code (`models.fit_mixed_crossed` and the `fit_spec` fallback rule) on the same frame. A refit counts only if it reproduces the published fixed effects: every printed coefficient row (%.5f) for v1, and the eps estimate, its CI, and the stored warning and fallback flags for v2. **159 of 159 refits pass that check.**
+
+**Rule.** A random component is at the boundary if its estimated variance is below 1e-06 or below 0.1% of the residual variance.
+
+| family | fits | reported as mixed | OLS fallback | boundary warning | forecaster at boundary | question at boundary | target at boundary | no component at boundary |
+|---|---|---|---|---|---|---|---|---|
+| v1 H1 | 1 | 1 | 0 | 1 | 0 | 0 | 0 | 1 |
+| v1 H3 | 5 | 5 | 0 | 4 | 0 | 0 | 0 | 5 |
+| v1 H4 | 5 | 5 | 0 | 4 | 0 | 0 | 0 | 5 |
+| v1 pilot | 12 | 12 | 0 | 10 | 0 | 0 | 0 | 12 |
+| v2 eps (Brier) | 68 | 62 | 6 | 62 | 0 | 0 | 0 | 62 |
+| v2 eps (log) | 68 | 64 | 4 | 30 | 0 | 0 | 0 | 64 |
+| total | 159 | 149 | 10 | 111 | 0 | 0 | 0 | 149 |
+
+10 fits were reported as the question-clustered OLS fallback (the mixed attempt did not converge). They carry no reported variance components and are left out of the component counts; the CSV still lists what their non-converged mixed attempt estimated, for reference. Of those attempts, 0 had a component at the boundary.
+
+Per-fit values: `docs/boundary_components.csv`.
