@@ -98,3 +98,19 @@ It is **not printed in the v2 report either**. `docs/forecast_v2_full_REPORT.md`
 The two figures are different quantities that happen to be close:
 - **0.0979** (0.097940) is the v2 cross-fitted out-of-sample log-score gain for M1 (v2 §6.4: adding the human term to a logistic recalibration of M1). It is stored only in `data/derived/v2_full_E_boot_crossfit.pkl` (gitignored). It first appears in a report at `docs/amendment6_REPORT.md:36`, as the fold check.
 - **+0.097** is the Amendment 6 raw score difference, superforecaster median alone vs M1 alone, with no fitting (−0.351 vs −0.448): `docs/amendment6_REPORT.md:144`, interval [+0.060, +0.140].
+
+## 5. Robustness: superforecaster median without one id (footnote only)
+
+Computed after Amendment 6; descriptive robustness for a footnote. Primary numbers unchanged; nobody is dropped from any reported analysis. The superforecaster median is rebuilt per target from the analysis frame without one id; everything else (M1, folds, clip, seeds, bootstrap: 2000 question-level draws, seed 20260906, v2 fold rule refit on each draw's clusters, C3 refit inside each draw) is as in v1 H2 and Amendment 6. The first row recomputes the locked values with the same code as a check.
+
+| case | rows removed | targets whose median changes | min superforecasters per target | v1 H2 S coefficient [95% CI] | S median at clip bound | H_S vs M1, log [CI] | H_S vs M1, Brier [CI] | H_S vs H_S+M1 · C1, log [CI] |
+|---|---|---|---|---|---|---|---|---|
+| locked (all 40 ids) | 0 | 0 of 578 | 3 | 1.79 [1.04, 2.53] | 160 | +0.097 [+0.060, +0.140] | +0.035 [+0.020, +0.052] | +0.034 [+0.020, +0.050] |
+| (a) without SPqHtpfr8B | 578 | 316 of 578 | 2 | 1.68 [0.94, 2.42] | 159 | +0.096 [+0.058, +0.140] | +0.035 [+0.020, +0.052] | +0.033 [+0.017, +0.050] |
+| (b) without SSjRQHn8XG | 4 | 2 of 578 | 3 | 1.79 [1.04, 2.54] | 160 | +0.097 [+0.060, +0.140] | +0.035 [+0.020, +0.052] | +0.034 [+0.020, +0.050] |
+
+H_S+M1 · C3 weight on the superforecaster median, per fold (folds 0–4):
+
+- locked (all 40 ids): 1.000, 1.000, 1.000, 1.000, 1.000 (fold SD 0.000)
+- (a) without SPqHtpfr8B: 1.000, 1.000, 1.000, 1.000, 1.000 (fold SD 0.000)
+- (b) without SSjRQHn8XG: 1.000, 1.000, 1.000, 1.000, 1.000 (fold SD 0.000)
