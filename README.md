@@ -1,8 +1,8 @@
 # forecast-complementarity
 
-Analysis code and locked specifications for a study of what human forecasters add to a model baseline, on the ForecastBench round of 2024-07-21.
+Analysis code and locked specifications for a study of forecast encompassing and combination between human medians and a language model, on the ForecastBench round of 2024-07-21.
 
-Paper: *Where the Benchmark Can Err: Human Deviations from Model Forecasts and Their Return*, https://doi.org/10.5281/zenodo.22589676
+Paper: *Human Medians and a Language-Model Forecast: Encompassing and Combination on One ForecastBench Round*, https://doi.org/10.5281/zenodo.22589676 (current version: https://doi.org/10.5281/zenodo.23147918). Earlier versions of this record carry the title *Where the Benchmark Can Err*.
 
 Code archive: https://doi.org/10.5281/zenodo.22600832
 
@@ -10,7 +10,8 @@ Code archive: https://doi.org/10.5281/zenodo.22600832
 
 - `specs/` the analysis specifications, each locked and pushed before the analysis it governs, with dated amendments
 - `code/` the pipeline
-- `docs/` the paper, the pilot and full-run reports, and the figures
+- `docs/` the pilot and full-run reports, the SPEC v3 amendment reports, and the figures
+- `paper/` the current paper PDF
 
 ## Related
 

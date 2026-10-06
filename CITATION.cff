@@ -12,7 +12,7 @@ repository-code: "https://github.com/aaronsun923/forecast-complementarity"
 doi: 10.5281/zenodo.22600832
 references:
   - type: article
-    title: "Where the Benchmark Can Err: Human Deviations from Model Forecasts and Their Return"
+    title: "Human Medians and a Language-Model Forecast: Encompassing and Combination on One ForecastBench Round"
     authors:
       - family-names: Sun
         given-names: Aaron
