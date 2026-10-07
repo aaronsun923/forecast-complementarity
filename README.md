@@ -26,14 +26,12 @@ The data are not in this repository. They live under `config.STUDY_ROOT` (defaul
    git -C forecastbench-datasets checkout 68932db171f5e13349d9bda0dd9f96fcf6e227e2
    ```
    `datasets/forecast_sets/2024-07-21/2024-07-21.ForecastBench.human_public_individual.json` is stored in Git LFS. Without `git-lfs` the clone holds a 130-byte pointer. Install `git-lfs` and run `git lfs pull`, or fetch the object through the GitHub LFS batch API. It must hash to sha256 `4b3661081a54be787832f89051b19c2ada2f8c96396d692db3f5a753bec2b1fd` (23,526,935 bytes).
-2. **The two forecast-set tarballs**, into `data/raw/`:
+2. **The processed forecast-set tarball**, into `data/raw/`. Only `processed_forecast_sets.tar.gz` is required. The 2026-09-06 snapshot is archived at https://doi.org/10.5281/zenodo.23201267. Download `processed_forecast_sets.tar.gz` from there into `data/raw/`, then:
    ```
-   mkdir -p data/raw && cd data/raw
-   curl -O https://www.forecastbench.org/assets/data/forecast-sets/forecast_sets.tar.gz
-   curl -O https://www.forecastbench.org/assets/data/processed-forecast-sets/processed_forecast_sets.tar.gz
+   cd data/raw
    tar xzf processed_forecast_sets.tar.gz      # -> forecastbench-processed-forecast-sets/
    ```
-   Their sha256 values must equal `config.TARBALL_SHA256` (also in `data/PROVENANCE.md` §1). **Warning:** the publisher regenerates both tarballs nightly and keeps no versions, so a download made after 2026-09-06 will not match. A run needs the 2026-09-06 snapshot itself. The pipeline reads only the extracted processed set; `forecast_sets.tar.gz` is hashed but not read.
+   Its sha256 must equal `config.TARBALL_SHA256["processed_forecast_sets.tar.gz"]` (also in `data/PROVENANCE.md` §1). Do not substitute a fresh download from forecastbench.org: the publisher regenerates the file nightly and keeps no versions, so a copy made after 2026-09-06 will not match. `forecast_sets.tar.gz` is not read by the pipeline. If it is present in `data/raw/` it must match its recorded hash; if it is absent the notebook prints a warning and continues.
 3. **Environment**: Python 3.9.6 and `pip install -r requirements.txt`.
 
 Then, from the repository root:
