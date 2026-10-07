@@ -1,0 +1,2194 @@
+{
+ "paper": "paper/Sun_2026_Human_Medians_and_a_Language_Model_Forecast.pdf",
+ "version": "v9 (Zenodo 10.5281/zenodo.23147918)",
+ "transcribed": "2026-10-06, by hand from the PDF text",
+ "conventions": "'paper' is the number as printed (Unicode minus kept). Numbers are parsed from it unless 'values' is given. Tolerance per number: half a unit in its last printed digit (the recomputed value must round to the printed one), unless 'tol' is given. 'transform': 'neg' negates the recomputed value and swaps its interval, for numbers the paper states as a decrease. 'scale': the printed number is in units of scale.",
+ "numbers": [
+  {
+   "id": "N001",
+   "section": "Abstract (p. 1)",
+   "label": "superforecaster ids",
+   "paper": "40",
+   "key": "ids.S_n"
+  },
+  {
+   "id": "N002",
+   "section": "Abstract (p. 1)",
+   "label": "public forecasters",
+   "paper": "500",
+   "key": "ids.P_n"
+  },
+  {
+   "id": "N003",
+   "section": "Abstract (p. 1)",
+   "label": "H2 coefficient, superforecaster median",
+   "paper": "1.79",
+   "key": "h2.S.bh"
+  },
+  {
+   "id": "N004",
+   "section": "Abstract (p. 1)",
+   "label": "H2 coefficient, public median",
+   "paper": "0.97",
+   "key": "h2.P.bh"
+  },
+  {
+   "id": "N005",
+   "section": "Abstract (p. 1)",
+   "label": "average superforecaster forecast beat M1, Brier ×100",
+   "paper": "3.4",
+   "key": "v1.h1.S"
+  },
+  {
+   "id": "N006",
+   "section": "Abstract (p. 1)",
+   "label": "average public forecast lost to M1, Brier ×100",
+   "paper": "7.8",
+   "key": "v1.h1.P",
+   "transform": "neg"
+  },
+  {
+   "id": "N007",
+   "section": "Abstract (p. 1)",
+   "label": "fitted combination (C3) weight on superforecaster median, every fold",
+   "paper": "1",
+   "key": "a6w.H_S+M1 · C3.min",
+   "tol": 0.0005,
+   "note": "'weight 1': checked to 3 decimals, as the A6 report prints it"
+  },
+  {
+   "id": "N008",
+   "section": "Abstract (p. 1)",
+   "label": "fitted combination (C4) weight on superforecaster median, every fold",
+   "paper": "1",
+   "key": "a6w.H_S+M1 · C4.min",
+   "tol": 0.0005,
+   "note": "'weight 1': checked to 3 decimals, as the A6 report prints it"
+  },
+  {
+   "id": "N009",
+   "section": "§2.1 (p. 2)",
+   "label": "datasets commit",
+   "paper": "68932db",
+   "key": "prov.commit7",
+   "type": "str"
+  },
+  {
+   "id": "N010",
+   "section": "§2.1 (p. 2)",
+   "label": "forecast due date of the round",
+   "paper": "2024-07-21",
+   "key": "cfg.round",
+   "type": "str"
+  },
+  {
+   "id": "N011",
+   "section": "§2.1 (p. 2)",
+   "label": "public forecasters in the round",
+   "paper": "500",
+   "key": "ids.P_n"
+  },
+  {
+   "id": "N012",
+   "section": "§2.1 (p. 2)",
+   "label": "superforecaster ids in the round",
+   "paper": "40",
+   "key": "ids.S_n"
+  },
+  {
+   "id": "N013",
+   "section": "§2.1 (p. 2)",
+   "label": "questions in the individual human files",
+   "paper": "189",
+   "key": "ids.questions"
+  },
+  {
+   "id": "N014",
+   "section": "§2.1 (p. 2)",
+   "label": "fewest forecasts by one superforecaster id",
+   "paper": "4",
+   "key": "ids.S_min_forecasts"
+  },
+  {
+   "id": "N015",
+   "section": "§2.1 (p. 2)",
+   "label": "of which on market questions ('all on market questions')",
+   "paper": "4",
+   "key": "ids.S_min_market"
+  },
+  {
+   "id": "N016",
+   "section": "§2.1 (p. 2)",
+   "label": "next smallest superforecaster id, forecasts",
+   "paper": "63",
+   "key": "ids.S_second_min"
+  },
+  {
+   "id": "N017",
+   "section": "§2.1 (p. 2)",
+   "label": "targets whose superforecaster median that id changes",
+   "paper": "2",
+   "key": "ids.min_id_median_changes"
+  },
+  {
+   "id": "N018",
+   "section": "§2.1 (p. 2)",
+   "label": "of targets",
+   "paper": "578",
+   "key": "v1.n_targets"
+  },
+  {
+   "id": "N019",
+   "section": "§2.1 (p. 2)",
+   "label": "superforecaster ids kept",
+   "paper": "40",
+   "key": "ids.S_n_frame"
+  },
+  {
+   "id": "N020",
+   "section": "§2.1 (p. 2)",
+   "label": "one id forecast all questions",
+   "paper": "189",
+   "key": "ids.S_max_questions"
+  },
+  {
+   "id": "N021",
+   "section": "§2.1 (p. 2)",
+   "label": "frame targets",
+   "paper": "578",
+   "key": "v1.n_targets"
+  },
+  {
+   "id": "N022",
+   "section": "§2.1 (p. 2)",
+   "label": "frame questions",
+   "paper": "162",
+   "key": "v1.n_questions"
+  },
+  {
+   "id": "N023",
+   "section": "§2.1 (p. 2)",
+   "label": "dataset targets",
+   "paper": "521",
+   "key": "v1.n_dataset"
+  },
+  {
+   "id": "N024",
+   "section": "§2.1 (p. 2)",
+   "label": "dataset questions",
+   "paper": "105",
+   "key": "v1.q_dataset"
+  },
+  {
+   "id": "N025",
+   "section": "§2.1 (p. 2)",
+   "label": "market targets",
+   "paper": "57",
+   "key": "v1.n_market"
+  },
+  {
+   "id": "N026",
+   "section": "§2.1 (p. 2)",
+   "label": "market questions",
+   "paper": "57",
+   "key": "v1.q_market"
+  },
+  {
+   "id": "N027",
+   "section": "§2.1 (p. 2)",
+   "label": "superforecaster forecasts per target, minimum",
+   "paper": "3",
+   "key": "v1.fpt.S.min"
+  },
+  {
+   "id": "N028",
+   "section": "§2.1 (p. 2)",
+   "label": "superforecaster forecasts per target, median",
+   "paper": "7",
+   "key": "v1.fpt.S.med"
+  },
+  {
+   "id": "N029",
+   "section": "§2.1 (p. 2)",
+   "label": "public forecasts per target, minimum",
+   "paper": "40",
+   "key": "v1.fpt.P.min"
+  },
+  {
+   "id": "N030",
+   "section": "§2.1 (p. 2)",
+   "label": "public forecasts per target, median",
+   "paper": "49",
+   "key": "v1.fpt.P.med"
+  },
+  {
+   "id": "N031",
+   "section": "§2.1 (p. 2)",
+   "label": "targets per superforecaster, median",
+   "paper": "87",
+   "key": "v1.cov.S.med"
+  },
+  {
+   "id": "N032",
+   "section": "§2.1 (p. 2)",
+   "label": "targets per superforecaster, range",
+   "paper": "4 to 578",
+   "key": "v1.cov.S.range"
+  },
+  {
+   "id": "N033",
+   "section": "§2.1 (p. 2)",
+   "label": "targets per public forecaster, median",
+   "paper": "58",
+   "key": "v1.cov.P.med"
+  },
+  {
+   "id": "N034",
+   "section": "§2.1 (p. 2)",
+   "label": "targets per public forecaster, range",
+   "paper": "22 to 84",
+   "key": "v1.cov.P.range"
+  },
+  {
+   "id": "N035",
+   "section": "§2.1 footnote 1 (p. 2)",
+   "label": "one superforecaster id forecast all targets",
+   "paper": "578",
+   "key": "ids.S_max_targets_frame"
+  },
+  {
+   "id": "N036",
+   "section": "§2.1 footnote 1 (p. 2)",
+   "label": "leaving it out changes the median on",
+   "paper": "316",
+   "key": "loo.a.changed"
+  },
+  {
+   "id": "N037",
+   "section": "§2.1 footnote 1 (p. 2)",
+   "label": "H2 superforecaster coefficient, all ids",
+   "paper": "1.79 [1.04, 2.53]",
+   "key": "h2.S.bh"
+  },
+  {
+   "id": "N038",
+   "section": "§2.1 footnote 1 (p. 2)",
+   "label": "H2 superforecaster coefficient, without that id",
+   "paper": "1.68 [0.94, 2.42]",
+   "key": "loo.a.bh"
+  },
+  {
+   "id": "N039",
+   "section": "§2.1 footnote 1 (p. 2)",
+   "label": "superforecaster median vs M1, log score, all ids",
+   "paper": "+0.097",
+   "key": "a6cmp.H_S vs M1.log"
+  },
+  {
+   "id": "N040",
+   "section": "§2.1 footnote 1 (p. 2)",
+   "label": "superforecaster median vs M1, log score, without that id",
+   "paper": "+0.096",
+   "key": "loo.a.dlog"
+  },
+  {
+   "id": "N041",
+   "section": "§2.1 footnote 1 (p. 2)",
+   "label": "fitted (C3) weight on the median without that id, every fold",
+   "paper": "1",
+   "key": "loo.a.w.C3.min",
+   "tol": 0.0005,
+   "note": "'stays at 1': checked to 3 decimals"
+  },
+  {
+   "id": "N042",
+   "section": "§2.1 footnote 1 (p. 2)",
+   "label": "fitted (C4) weight on the median without that id, every fold",
+   "paper": "1",
+   "key": "loo.a.w.C4.min",
+   "tol": 0.0005,
+   "note": "'stays at 1': checked to 3 decimals; Section 6 says both fitted combiners"
+  },
+  {
+   "id": "N043",
+   "section": "§2.1 (p. 3)",
+   "label": "effective number of clusters ('about 162')",
+   "paper": "162",
+   "key": "v1.n_questions"
+  },
+  {
+   "id": "N044",
+   "section": "§2.2 (p. 3)",
+   "label": "base models in the matched condition",
+   "paper": "17",
+   "key": "nb.n_base"
+  },
+  {
+   "id": "N045",
+   "section": "§2.2 (p. 3)",
+   "label": "prompt scaffolds in the matched condition",
+   "paper": "2",
+   "key": "nb.n_scaffolds"
+  },
+  {
+   "id": "N046",
+   "section": "§2.2 (p. 3)",
+   "label": "matched variants",
+   "paper": "34",
+   "key": "v1.n_variants"
+  },
+  {
+   "id": "N047",
+   "section": "§2.2 (p. 3)",
+   "label": "human targets lacking a forecast from any of the 34 variants ('every human target has a forecast from every one')",
+   "paper": "every",
+   "key": "nb.cov_missing",
+   "values": [
+    0
+   ]
+  },
+  {
+   "id": "N048",
+   "section": "§2.2 (p. 3)",
+   "label": "flagged-row eligibility limit, %",
+   "paper": "5",
+   "key": "cfg.imputed_max_pct"
+  },
+  {
+   "id": "N049",
+   "section": "§2.2 (p. 3)",
+   "label": "variants ineligible on that rule",
+   "paper": "1",
+   "key": "v1.n_ineligible"
+  },
+  {
+   "id": "N050",
+   "section": "§2.2 (p. 3)",
+   "label": "of variants",
+   "paper": "34",
+   "key": "v1.n_variants"
+  },
+  {
+   "id": "N051",
+   "section": "§2.3 (p. 3)",
+   "label": "public rows with a forecast outside [0, 1]",
+   "paper": "200",
+   "key": "v1.n_invalid"
+  },
+  {
+   "id": "N052",
+   "section": "§2.3 (p. 3)",
+   "label": "as a share of frame rows plus those rows, %",
+   "paper": "0.6",
+   "key": "nb.invalid_share_pct",
+   "note": "denominator: 33,334 frame rows + 200 excluded rows"
+  },
+  {
+   "id": "N053",
+   "section": "§2.3 (p. 3)",
+   "label": "forecasters with such rows",
+   "paper": "42",
+   "key": "v1.invalid_forecasters"
+  },
+  {
+   "id": "N054",
+   "section": "§2.3 (p. 3)",
+   "label": "largest such value",
+   "paper": "5.0 × 10⁸",
+   "key": "v1.invalid_max",
+   "values": [
+    5.0
+   ],
+   "scale": 100000000.0
+  },
+  {
+   "id": "N055",
+   "section": "§2.3 (p. 3)",
+   "label": "public mean Brier difference ×100, rows dropped",
+   "paper": "−7.81",
+   "key": "v1.h1.P"
+  },
+  {
+   "id": "N056",
+   "section": "§2.3 (p. 3)",
+   "label": "public mean Brier difference ×100, rows clipped to [0, 1]",
+   "paper": "−8.09",
+   "key": "v1.h1clip.P"
+  },
+  {
+   "id": "N057",
+   "section": "§2.3 (p. 3)",
+   "label": "human market rows not mappable to a resolution date",
+   "paper": "242",
+   "key": "v1.unmappable"
+  },
+  {
+   "id": "N058",
+   "section": "§2.3 (p. 3)",
+   "label": "human rows on unresolved targets",
+   "paper": "21,596",
+   "key": "v1.unresolved"
+  },
+  {
+   "id": "N059",
+   "section": "§3 (pp. 3–4)",
+   "label": "selection-set targets",
+   "paper": "930",
+   "key": "v1.sel_targets"
+  },
+  {
+   "id": "N060",
+   "section": "§3 (pp. 3–4)",
+   "label": "selection-set questions",
+   "paper": "241",
+   "key": "v1.sel_questions"
+  },
+  {
+   "id": "N061",
+   "section": "§3 (pp. 3–4)",
+   "label": "test targets",
+   "paper": "578",
+   "key": "v1.n_targets"
+  },
+  {
+   "id": "N062",
+   "section": "§3 (pp. 3–4)",
+   "label": "targets shared by selection and test sets ('shares no target')",
+   "paper": "no",
+   "key": "v1.sel_intersection",
+   "values": [
+    0
+   ]
+  },
+  {
+   "id": "N063",
+   "section": "§3 (pp. 3–4)",
+   "label": "eligible variants",
+   "paper": "33",
+   "key": "v1.n_eligible"
+  },
+  {
+   "id": "N064",
+   "section": "§3 (pp. 3–4)",
+   "label": "M1 selection-set Brier ×100",
+   "paper": "16.16",
+   "key": "v1.sel_brier_1"
+  },
+  {
+   "id": "N065",
+   "section": "§3 (pp. 3–4)",
+   "label": "runner-up (Sonnet scratchpad) selection-set Brier ×100",
+   "paper": "16.34",
+   "key": "v1.sel_brier_2"
+  },
+  {
+   "id": "N066",
+   "section": "§3 (pp. 3–4)",
+   "label": "unrestricted set: share of combination targets, %",
+   "paper": "86",
+   "key": "v1.unrestricted_combo_pct"
+  },
+  {
+   "id": "N067",
+   "section": "§3 (p. 4)",
+   "label": "Mens: matched variants other than M1",
+   "paper": "33",
+   "key": "a6.mens_n"
+  },
+  {
+   "id": "N068",
+   "section": "§4 (p. 4)",
+   "label": "forecaster-target rows (H1)",
+   "paper": "33,334",
+   "key": "v1.n_rows"
+  },
+  {
+   "id": "N069",
+   "section": "§4 (p. 4)",
+   "label": "H1 superforecasters, Brier ×100",
+   "paper": "+3.38 ×100 [1.36, 5.41]",
+   "key": "v1.h1.S",
+   "values": [
+    3.38,
+    1.36,
+    5.41
+   ]
+  },
+  {
+   "id": "N070",
+   "section": "§4 (p. 4)",
+   "label": "H1 public, Brier ×100",
+   "paper": "−7.81 ×100 [−9.69, −5.92]",
+   "key": "v1.h1.P",
+   "values": [
+    -7.81,
+    -9.69,
+    -5.92
+   ]
+  },
+  {
+   "id": "N071",
+   "section": "§4 (p. 4)",
+   "label": "superforecaster median vs M1, log score",
+   "paper": "0.097 [0.060, 0.140]",
+   "key": "a6cmp.H_S vs M1.log"
+  },
+  {
+   "id": "N072",
+   "section": "§4 (p. 4)",
+   "label": "superforecaster median vs M1, Brier",
+   "paper": "0.035 [0.020, 0.052]",
+   "key": "a6cmp.H_S vs M1.brier"
+  },
+  {
+   "id": "N073",
+   "section": "§4 (p. 4)",
+   "label": "public median vs M1, log score",
+   "paper": "−0.018 [−0.060, +0.027]",
+   "key": "a6cmp.H_P vs M1.log"
+  },
+  {
+   "id": "N074",
+   "section": "§4 (p. 4)",
+   "label": "public median vs M1, Brier",
+   "paper": "−0.001 [−0.019, +0.017]",
+   "key": "a6cmp.H_P vs M1.brier"
+  },
+  {
+   "id": "N075",
+   "section": "§4 (p. 4)",
+   "label": "public forecasts per median ('about 49')",
+   "paper": "49",
+   "key": "v1.fpt.P.med"
+  },
+  {
+   "id": "N076",
+   "section": "§4 (p. 4)",
+   "label": "targets scored",
+   "paper": "578",
+   "key": "v1.n_targets"
+  },
+  {
+   "id": "N077",
+   "section": "Table 1 (p. 4)",
+   "label": "per forecast, superforecasters, Brier ×100",
+   "paper": "+3.38 [1.36, 5.41]",
+   "key": "v1.h1.S"
+  },
+  {
+   "id": "N078",
+   "section": "Table 1 (p. 4)",
+   "label": "per forecast, public, Brier ×100",
+   "paper": "−7.81 [−9.69, −5.92]",
+   "key": "v1.h1.P"
+  },
+  {
+   "id": "N079",
+   "section": "Table 1 (p. 4)",
+   "label": "median, superforecasters, Brier",
+   "paper": "+0.035 [+0.020, +0.052]",
+   "key": "a6cmp.H_S vs M1.brier"
+  },
+  {
+   "id": "N080",
+   "section": "Table 1 (p. 4)",
+   "label": "median, superforecasters, log score",
+   "paper": "+0.097 [+0.060, +0.140]",
+   "key": "a6cmp.H_S vs M1.log"
+  },
+  {
+   "id": "N081",
+   "section": "Table 1 (p. 4)",
+   "label": "median, public, Brier",
+   "paper": "−0.001 [−0.019, +0.017]",
+   "key": "a6cmp.H_P vs M1.brier"
+  },
+  {
+   "id": "N082",
+   "section": "Table 1 (p. 4)",
+   "label": "median, public, log score",
+   "paper": "−0.018 [−0.060, +0.027]",
+   "key": "a6cmp.H_P vs M1.log"
+  },
+  {
+   "id": "N083",
+   "section": "§5.1 (p. 5)",
+   "label": "clip bounds",
+   "paper": "[0.01, 0.99]",
+   "key": "cfg.clip"
+  },
+  {
+   "id": "N084",
+   "section": "Table 2 (p. 5)",
+   "label": "targets",
+   "paper": "578",
+   "key": "h2.S.n"
+  },
+  {
+   "id": "N085",
+   "section": "Table 2 (p. 5)",
+   "label": "question clusters",
+   "paper": "162",
+   "key": "h2.S.ncl"
+  },
+  {
+   "id": "N086",
+   "section": "Table 2 (p. 5)",
+   "label": "superforecasters: b_h (preregistered)",
+   "paper": "1.79 [1.04, 2.53]",
+   "key": "h2.S.bh"
+  },
+  {
+   "id": "N087",
+   "section": "Table 2 (p. 5)",
+   "label": "superforecasters: b_a − b_h (reverse)",
+   "paper": "−0.23 [−0.77, 0.30]",
+   "key": "h2.S.rev"
+  },
+  {
+   "id": "N088",
+   "section": "Table 2 (p. 5)",
+   "label": "public: b_h (preregistered)",
+   "paper": "0.97 [0.24, 1.70]",
+   "key": "h2.P.bh"
+  },
+  {
+   "id": "N089",
+   "section": "Table 2 (p. 5)",
+   "label": "public: b_a − b_h (reverse)",
+   "paper": "0.72 [0.32, 1.12]",
+   "key": "h2.P.rev"
+  },
+  {
+   "id": "N090",
+   "section": "§5.2 (p. 5)",
+   "label": "superforecaster median at the clip bound, targets",
+   "paper": "160",
+   "key": "v1.h2.S.clipped"
+  },
+  {
+   "id": "N091",
+   "section": "§5.2 (p. 5)",
+   "label": "of targets",
+   "paper": "578",
+   "key": "v1.n_targets"
+  },
+  {
+   "id": "N092",
+   "section": "§5.2 (p. 5)",
+   "label": "public median at the clip bound ('none')",
+   "paper": "none",
+   "key": "v1.h2.P.clipped",
+   "values": [
+    0
+   ]
+  },
+  {
+   "id": "N093",
+   "section": "§5.2 (p. 5)",
+   "label": "clip [0.001, 0.999]: superforecasters b_h",
+   "paper": "1.77 [0.99, 2.54]",
+   "key": "h2s.S.bh"
+  },
+  {
+   "id": "N094",
+   "section": "§5.2 (p. 5)",
+   "label": "clip [0.001, 0.999]: public b_h",
+   "paper": "0.97 [0.24, 1.70]",
+   "key": "h2s.P.bh"
+  },
+  {
+   "id": "N095",
+   "section": "§5.2 (p. 5)",
+   "label": "clip [0.001, 0.999]: superforecasters reverse ('unchanged to two decimals' = Table 2)",
+   "paper": "−0.23 [−0.77, 0.30]",
+   "key": "h2s.S.rev",
+   "note": "the paper states the value by reference to Table 2"
+  },
+  {
+   "id": "N096",
+   "section": "§5.2 (p. 5)",
+   "label": "clip [0.001, 0.999]: public reverse ('unchanged to two decimals' = Table 2)",
+   "paper": "0.72 [0.32, 1.12]",
+   "key": "h2s.P.rev",
+   "note": "the paper states the value by reference to Table 2"
+  },
+  {
+   "id": "N097",
+   "section": "§5.3 (p. 5)",
+   "label": "dataset targets, superforecasters",
+   "paper": "2.16 [1.04, 3.28]",
+   "key": "a5b.dataset.S"
+  },
+  {
+   "id": "N098",
+   "section": "§5.3 (p. 5)",
+   "label": "dataset targets, public",
+   "paper": "1.08 [0.26, 1.90]",
+   "key": "a5b.dataset.P"
+  },
+  {
+   "id": "N099",
+   "section": "§5.3 (p. 5)",
+   "label": "market targets, superforecasters",
+   "paper": "1.12 [0.13, 2.11]",
+   "key": "a5b.market.S"
+  },
+  {
+   "id": "N100",
+   "section": "§5.3 (p. 5)",
+   "label": "market targets, public",
+   "paper": "1.94 [0.34, 3.55]",
+   "key": "a5b.market.P"
+  },
+  {
+   "id": "N101",
+   "section": "§5.3 (p. 5)",
+   "label": "market targets",
+   "paper": "57",
+   "key": "a5b.market.n"
+  },
+  {
+   "id": "N102",
+   "section": "§6.1 (p. 6)",
+   "label": "questions split into folds",
+   "paper": "162",
+   "key": "a6.n_questions"
+  },
+  {
+   "id": "N103",
+   "section": "§6.1 (p. 6)",
+   "label": "folds",
+   "paper": "five",
+   "key": "a6.n_folds",
+   "values": [
+    5
+   ]
+  },
+  {
+   "id": "N104",
+   "section": "§6.1 (p. 6)",
+   "label": "Mens: matched variants other than M1",
+   "paper": "33",
+   "key": "a6.mens_n"
+  },
+  {
+   "id": "N105",
+   "section": "§6.1 (p. 6)",
+   "label": "bootstrap draws",
+   "paper": "2,000",
+   "key": "a6.draws"
+  },
+  {
+   "id": "N106",
+   "section": "§6.1 (p. 6)",
+   "label": "Mens alone, log score",
+   "paper": "−0.511",
+   "key": "a6sys.Mens.log"
+  },
+  {
+   "id": "N107",
+   "section": "§6.1 (p. 6)",
+   "label": "M1 alone, log score",
+   "paper": "−0.448",
+   "key": "a6sys.M1.log"
+  },
+  {
+   "id": "N108",
+   "section": "§6.1 (p. 6)",
+   "label": "fold-SD rule",
+   "paper": "0.2",
+   "key": "a6.sd_rule"
+  },
+  {
+   "id": "N109",
+   "section": "§6.1 (p. 6)",
+   "label": "largest fold SD of a constrained (C3/C4) weight",
+   "paper": "0.099",
+   "key": "nb.a6_max_sd"
+  },
+  {
+   "id": "N110",
+   "section": "§6.1 (p. 6)",
+   "label": "system with the largest fold SD",
+   "paper": "public median with M1 under C3",
+   "key": "nb.a6_max_sd_system",
+   "type": "str",
+   "values": [
+    "H_P+M1 · C3"
+   ]
+  },
+  {
+   "id": "N111",
+   "section": "Table 3, Panel A (p. 6)",
+   "label": "targets",
+   "paper": "578",
+   "key": "a6.n_targets"
+  },
+  {
+   "id": "N112",
+   "section": "Table 3, Panel A (p. 6)",
+   "label": "questions",
+   "paper": "162",
+   "key": "a6.n_questions"
+  },
+  {
+   "id": "N113",
+   "section": "Table 3, Panel A (p. 6)",
+   "label": "M1: log score, Brier",
+   "paper": "−0.448 0.153",
+   "key": "a6sys.M1.both"
+  },
+  {
+   "id": "N114",
+   "section": "Table 3, Panel A (p. 6)",
+   "label": "Mens: log score, Brier",
+   "paper": "−0.511 0.173",
+   "key": "a6sys.Mens.both"
+  },
+  {
+   "id": "N115",
+   "section": "Table 3, Panel A (p. 6)",
+   "label": "Superforecaster median: log score, Brier",
+   "paper": "−0.351 0.118",
+   "key": "a6sys.H_S.both"
+  },
+  {
+   "id": "N116",
+   "section": "Table 3, Panel A (p. 6)",
+   "label": "Public median: log score, Brier",
+   "paper": "−0.466 0.154",
+   "key": "a6sys.H_P.both"
+  },
+  {
+   "id": "N117",
+   "section": "Table 3, Panel A (p. 6)",
+   "label": "Superforecaster median + M1, equal weights (C1): log score, Brier",
+   "paper": "−0.385 0.129",
+   "key": "a6sys.H_S+M1 · C1.both"
+  },
+  {
+   "id": "N118",
+   "section": "Table 3, Panel A (p. 6)",
+   "label": "Superforecaster median + M1, fitted weights (C3): log score, Brier",
+   "paper": "−0.351 0.118",
+   "key": "a6sys.H_S+M1 · C3.both"
+  },
+  {
+   "id": "N119",
+   "section": "Table 3, Panel A (p. 6)",
+   "label": "Public median + M1, equal weights (C1): log score, Brier",
+   "paper": "−0.440 0.146",
+   "key": "a6sys.H_P+M1 · C1.both"
+  },
+  {
+   "id": "N120",
+   "section": "Table 3, Panel A (p. 6)",
+   "label": "Public median + M1, fitted weights (C3): log score, Brier",
+   "paper": "−0.444 0.148",
+   "key": "a6sys.H_P+M1 · C3.both"
+  },
+  {
+   "id": "N121",
+   "section": "Table 3, Panel A (p. 6)",
+   "label": "M1 + Mens, equal weights (C1): log score, Brier",
+   "paper": "−0.470 0.158",
+   "key": "a6sys.M1+Mens · C1.both"
+  },
+  {
+   "id": "N122",
+   "section": "Table 3, Panel A (p. 6)",
+   "label": "Superforecaster median + Mens, equal weights (C1): log score, Brier",
+   "paper": "−0.416 0.134",
+   "key": "a6sys.H_S+Mens · C1.both"
+  },
+  {
+   "id": "N123",
+   "section": "Table 3, Panel A (p. 6)",
+   "label": "Public median + Mens, equal weights (C1): log score, Brier",
+   "paper": "−0.473 0.156",
+   "key": "a6sys.H_P+Mens · C1.both"
+  },
+  {
+   "id": "N124",
+   "section": "Table 3, Panel B (pp. 6–7)",
+   "label": "Superforecaster median vs M1: log score",
+   "paper": "+0.097 [+0.060, +0.140]",
+   "key": "a6cmp.H_S vs M1.log"
+  },
+  {
+   "id": "N125",
+   "section": "Table 3, Panel B (pp. 6–7)",
+   "label": "Superforecaster median vs M1: Brier",
+   "paper": "+0.035 [+0.020, +0.052]",
+   "key": "a6cmp.H_S vs M1.brier"
+  },
+  {
+   "id": "N126",
+   "section": "Table 3, Panel B (pp. 6–7)",
+   "label": "Superforecaster median vs its equal-weight pool with M1 (C1): log score",
+   "paper": "+0.034 [+0.020, +0.050]",
+   "key": "a6note.H_S vs H_S+M1 · C1.log"
+  },
+  {
+   "id": "N127",
+   "section": "Table 3, Panel B (pp. 6–7)",
+   "label": "Superforecaster median vs its equal-weight pool with M1 (C1): Brier",
+   "paper": "+0.011 [+0.005, +0.017]",
+   "key": "a6note.H_S vs H_S+M1 · C1.brier"
+  },
+  {
+   "id": "N128",
+   "section": "Table 3, Panel B (pp. 6–7)",
+   "label": "Superforecaster median vs its equal-weight pool with M1 (C2): log score",
+   "paper": "+0.025 [+0.012, +0.039]",
+   "key": "a6note.H_S vs H_S+M1 · C2.log"
+  },
+  {
+   "id": "N129",
+   "section": "Table 3, Panel B (pp. 6–7)",
+   "label": "Superforecaster median vs its equal-weight pool with M1 (C2): Brier",
+   "paper": "+0.008 [+0.003, +0.014]",
+   "key": "a6note.H_S vs H_S+M1 · C2.brier"
+  },
+  {
+   "id": "N130",
+   "section": "Table 3, Panel B (pp. 6–7)",
+   "label": "Public median vs M1: log score",
+   "paper": "−0.018 [−0.060, +0.027]",
+   "key": "a6cmp.H_P vs M1.log"
+  },
+  {
+   "id": "N131",
+   "section": "Table 3, Panel B (pp. 6–7)",
+   "label": "Public median vs M1: Brier",
+   "paper": "−0.001 [−0.019, +0.017]",
+   "key": "a6cmp.H_P vs M1.brier"
+  },
+  {
+   "id": "N132",
+   "section": "Table 3, Panel B (pp. 6–7)",
+   "label": "Public median + M1 (C1) vs M1: log score",
+   "paper": "+0.008 [−0.014, +0.034]",
+   "key": "a6cmp.H_P+M1 · C1 vs M1.log"
+  },
+  {
+   "id": "N133",
+   "section": "Table 3, Panel B (pp. 6–7)",
+   "label": "Public median + M1 (C1) vs M1: Brier",
+   "paper": "+0.007 [−0.002, +0.016]",
+   "key": "a6cmp.H_P+M1 · C1 vs M1.brier"
+  },
+  {
+   "id": "N134",
+   "section": "Table 3, Panel B (pp. 6–7)",
+   "label": "Public median + M1 (C3) vs M1: log score",
+   "paper": "+0.004 [−0.007, +0.031]",
+   "key": "a6cmp.H_P+M1 · C3 vs M1.log"
+  },
+  {
+   "id": "N135",
+   "section": "Table 3, Panel B (pp. 6–7)",
+   "label": "Public median + M1 (C3) vs M1: Brier",
+   "paper": "+0.005 [−0.001, +0.017]",
+   "key": "a6cmp.H_P+M1 · C3 vs M1.brier"
+  },
+  {
+   "id": "N136",
+   "section": "Table 3, Panel B (pp. 6–7)",
+   "label": "Mens vs M1: log score",
+   "paper": "−0.063 [−0.094, −0.032]",
+   "key": "a6cmp.Mens vs M1.log"
+  },
+  {
+   "id": "N137",
+   "section": "Table 3, Panel B (pp. 6–7)",
+   "label": "Mens vs M1: Brier",
+   "paper": "−0.020 [−0.032, −0.008]",
+   "key": "a6cmp.Mens vs M1.brier"
+  },
+  {
+   "id": "N138",
+   "section": "§6.2 (p. 7)",
+   "label": "C3 weight on superforecaster median, every fold",
+   "paper": "1",
+   "key": "a6w.H_S+M1 · C3.min",
+   "tol": 0.0005,
+   "note": "'weight 1 in every fold': checked to 3 decimals"
+  },
+  {
+   "id": "N139",
+   "section": "§6.2 (p. 7)",
+   "label": "C4 weight on superforecaster median, every fold",
+   "paper": "1",
+   "key": "a6w.H_S+M1 · C4.min",
+   "tol": 0.0005,
+   "note": "'weight 1 in every fold': checked to 3 decimals"
+  },
+  {
+   "id": "N140",
+   "section": "§6.2 (p. 7)",
+   "label": "median vs its C1 pool with M1, log score",
+   "paper": "0.034",
+   "key": "a6note.H_S vs H_S+M1 · C1.log"
+  },
+  {
+   "id": "N141",
+   "section": "§6.2 (p. 7)",
+   "label": "median vs its C2 pool with M1, log score",
+   "paper": "0.025",
+   "key": "a6note.H_S vs H_S+M1 · C2.log"
+  },
+  {
+   "id": "N142",
+   "section": "§6.2 (p. 7)",
+   "label": "reverse coefficient, superforecaster median",
+   "paper": "−0.23 [−0.77, 0.30]",
+   "key": "h2.S.rev"
+  },
+  {
+   "id": "N143",
+   "section": "§6.2 (p. 7)",
+   "label": "C3u weight on superforecaster median",
+   "paper": "1.24",
+   "key": "a6w.H_S+M1 · C3u.mean1"
+  },
+  {
+   "id": "N144",
+   "section": "§6.2 (p. 7)",
+   "label": "C3u weight on M1 (with superforecaster median)",
+   "paper": "−0.17",
+   "key": "a6w.H_S+M1 · C3u.mean2"
+  },
+  {
+   "id": "N145",
+   "section": "§6.2 (p. 7)",
+   "label": "public median + M1 (C1) vs M1, log score",
+   "paper": "0.008, from −0.014 to +0.034",
+   "key": "a6cmp.H_P+M1 · C1 vs M1.log"
+  },
+  {
+   "id": "N146",
+   "section": "§6.2 (p. 7)",
+   "label": "public median + M1 (C3) vs M1, log score",
+   "paper": "0.004, from −0.007 to +0.031",
+   "key": "a6cmp.H_P+M1 · C3 vs M1.log"
+  },
+  {
+   "id": "N147",
+   "section": "§6.2 (p. 7)",
+   "label": "C3u weight on public median",
+   "paper": "0.52",
+   "key": "a6w.H_P+M1 · C3u.mean1"
+  },
+  {
+   "id": "N148",
+   "section": "§6.2 (p. 7)",
+   "label": "C3u weight on M1 (with public median)",
+   "paper": "0.50",
+   "key": "a6w.H_P+M1 · C3u.mean2"
+  },
+  {
+   "id": "N149",
+   "section": "§6.2 (p. 7)",
+   "label": "public median vs M1, log score",
+   "paper": "−0.018",
+   "key": "a6cmp.H_P vs M1.log"
+  },
+  {
+   "id": "N150",
+   "section": "§6.2 (p. 7)",
+   "label": "public median vs M1, Brier",
+   "paper": "−0.001",
+   "key": "a6cmp.H_P vs M1.brier"
+  },
+  {
+   "id": "N151",
+   "section": "§6.3 (p. 7)",
+   "label": "superforecaster median + Mens vs Mens, log score, range over C1–C4",
+   "paper": "+0.095 to +0.161",
+   "key": "a6coprim.H_S.range"
+  },
+  {
+   "id": "N152",
+   "section": "§6.3 (p. 7)",
+   "label": "public median + Mens vs Mens, log score, range over C1–C4",
+   "paper": "+0.038 to +0.044",
+   "key": "a6coprim.H_P.range"
+  },
+  {
+   "id": "N153",
+   "section": "§6.3 (p. 7)",
+   "label": "superforecasters per median ('about 7')",
+   "paper": "7",
+   "key": "v1.fpt.S.med"
+  },
+  {
+   "id": "N154",
+   "section": "§6.3 (p. 7)",
+   "label": "public forecasters per median ('about 49')",
+   "paper": "49",
+   "key": "v1.fpt.P.med"
+  },
+  {
+   "id": "N155",
+   "section": "§6.3 (p. 7)",
+   "label": "noise control: public forecasts per draw",
+   "paper": "7",
+   "key": "a6.noise_k"
+  },
+  {
+   "id": "N156",
+   "section": "§6.3 (p. 7)",
+   "label": "noise control: draws",
+   "paper": "200",
+   "key": "a6.noise_draws"
+  },
+  {
+   "id": "N157",
+   "section": "§6.3 (p. 7)",
+   "label": "noise control: N7 + Mens vs Mens, 2.5th–97.5th percentile, envelope over C1–C4",
+   "paper": "+0.010 and +0.043",
+   "key": "a6noise.envelope"
+  },
+  {
+   "id": "N158",
+   "section": "§6.3 (p. 7)",
+   "label": "C2: adding M1 to superforecaster median + Mens lowers log score by",
+   "paper": "0.011 [0.003, 0.020]",
+   "key": "a6cmp.H_S+M1+Mens · C2 vs H_S+Mens · C2.log",
+   "transform": "neg"
+  },
+  {
+   "id": "N159",
+   "section": "§6.3 (p. 7)",
+   "label": "C1: adding M1 to superforecaster median + Mens lowers log score by",
+   "paper": "0.004 [−0.003, 0.012]",
+   "key": "a6cmp.H_S+M1+Mens · C1 vs H_S+Mens · C1.log",
+   "transform": "neg"
+  },
+  {
+   "id": "N160",
+   "section": "§7 (p. 8)",
+   "label": "M1 selection-set Brier ×100",
+   "paper": "16.16",
+   "key": "a5.Q_a"
+  },
+  {
+   "id": "N161",
+   "section": "§7 (p. 8)",
+   "label": "best news variant (Sonnet, superforecaster prompt 1 with news) selection-set Brier ×100",
+   "paper": "17.37",
+   "key": "a5.Q.Claude-3-5-Sonnet-20240620 (superforecaster with news 1)"
+  },
+  {
+   "id": "N162",
+   "section": "§7 (p. 8)",
+   "label": "Sonnet scratchpad with news, selection-set Brier ×100",
+   "paper": "17.94",
+   "key": "a5.Q.Claude-3-5-Sonnet-20240620 (scratchpad with news)"
+  },
+  {
+   "id": "N163",
+   "section": "§7 (p. 8)",
+   "label": "Sonnet scratchpad with news and freeze values, selection-set Brier ×100",
+   "paper": "17.63",
+   "key": "a5.Q.Claude-3-5-Sonnet-20240620 (scratchpad with news with freeze values)"
+  },
+  {
+   "id": "N164",
+   "section": "§7 (p. 8)",
+   "label": "best news variant vs M1 on test targets, log score",
+   "paper": "−0.021 [−0.069, +0.020]",
+   "key": "a6cmp.Mnews vs M1.log"
+  },
+  {
+   "id": "N165",
+   "section": "§7 (p. 8)",
+   "label": "best news variant vs M1 on test targets, Brier",
+   "paper": "−0.006 [−0.026, +0.010]",
+   "key": "a6cmp.Mnews vs M1.brier"
+  },
+  {
+   "id": "N166",
+   "section": "§8 (p. 8)",
+   "label": "effective sample ('about 162 questions')",
+   "paper": "162",
+   "key": "v1.n_questions"
+  },
+  {
+   "id": "N167",
+   "section": "§8 (p. 8)",
+   "label": "market subset, targets",
+   "paper": "57",
+   "key": "v1.n_market"
+  },
+  {
+   "id": "N168",
+   "section": "§8 (p. 8)",
+   "label": "superforecaster median pools ('about 7')",
+   "paper": "7",
+   "key": "v1.fpt.S.med"
+  },
+  {
+   "id": "N169",
+   "section": "Table A1 (p. 11)",
+   "label": "Superforecaster median + M1, C1: log score, Brier",
+   "paper": "−0.385 0.129",
+   "key": "a6sys.H_S+M1 · C1.both"
+  },
+  {
+   "id": "N170",
+   "section": "Table A1 (p. 11)",
+   "label": "Superforecaster median + M1, C2: log score, Brier",
+   "paper": "−0.375 0.127",
+   "key": "a6sys.H_S+M1 · C2.both"
+  },
+  {
+   "id": "N171",
+   "section": "Table A1 (p. 11)",
+   "label": "Superforecaster median + M1, C3: log score, Brier",
+   "paper": "−0.351 0.118",
+   "key": "a6sys.H_S+M1 · C3.both"
+  },
+  {
+   "id": "N172",
+   "section": "Table A1 (p. 11)",
+   "label": "Superforecaster median + M1, C4: log score, Brier",
+   "paper": "−0.351 0.118",
+   "key": "a6sys.H_S+M1 · C4.both"
+  },
+  {
+   "id": "N173",
+   "section": "Table A1 (p. 11)",
+   "label": "Public median + M1, C1: log score, Brier",
+   "paper": "−0.440 0.146",
+   "key": "a6sys.H_P+M1 · C1.both"
+  },
+  {
+   "id": "N174",
+   "section": "Table A1 (p. 11)",
+   "label": "Public median + M1, C2: log score, Brier",
+   "paper": "−0.435 0.146",
+   "key": "a6sys.H_P+M1 · C2.both"
+  },
+  {
+   "id": "N175",
+   "section": "Table A1 (p. 11)",
+   "label": "Public median + M1, C3: log score, Brier",
+   "paper": "−0.444 0.148",
+   "key": "a6sys.H_P+M1 · C3.both"
+  },
+  {
+   "id": "N176",
+   "section": "Table A1 (p. 11)",
+   "label": "Public median + M1, C4: log score, Brier",
+   "paper": "−0.439 0.148",
+   "key": "a6sys.H_P+M1 · C4.both"
+  },
+  {
+   "id": "N177",
+   "section": "Table A1 (p. 11)",
+   "label": "Superforecaster median + Mens, C1: log score, Brier",
+   "paper": "−0.416 0.134",
+   "key": "a6sys.H_S+Mens · C1.both"
+  },
+  {
+   "id": "N178",
+   "section": "Table A1 (p. 11)",
+   "label": "Superforecaster median + Mens, C2: log score, Brier",
+   "paper": "−0.385 0.127",
+   "key": "a6sys.H_S+Mens · C2.both"
+  },
+  {
+   "id": "N179",
+   "section": "Table A1 (p. 11)",
+   "label": "Superforecaster median + Mens, C3: log score, Brier",
+   "paper": "−0.351 0.118",
+   "key": "a6sys.H_S+Mens · C3.both"
+  },
+  {
+   "id": "N180",
+   "section": "Table A1 (p. 11)",
+   "label": "Superforecaster median + Mens, C4: log score, Brier",
+   "paper": "−0.351 0.118",
+   "key": "a6sys.H_S+Mens · C4.both"
+  },
+  {
+   "id": "N181",
+   "section": "Table A1 (p. 11)",
+   "label": "Public median + Mens, C1: log score, Brier",
+   "paper": "−0.473 0.156",
+   "key": "a6sys.H_P+Mens · C1.both"
+  },
+  {
+   "id": "N182",
+   "section": "Table A1 (p. 11)",
+   "label": "Public median + Mens, C2: log score, Brier",
+   "paper": "−0.469 0.154",
+   "key": "a6sys.H_P+Mens · C2.both"
+  },
+  {
+   "id": "N183",
+   "section": "Table A1 (p. 11)",
+   "label": "Public median + Mens, C3: log score, Brier",
+   "paper": "−0.470 0.155",
+   "key": "a6sys.H_P+Mens · C3.both"
+  },
+  {
+   "id": "N184",
+   "section": "Table A1 (p. 11)",
+   "label": "Public median + Mens, C4: log score, Brier",
+   "paper": "−0.467 0.155",
+   "key": "a6sys.H_P+Mens · C4.both"
+  },
+  {
+   "id": "N185",
+   "section": "Table A1 (p. 11)",
+   "label": "M1 + Mens, C1: log score, Brier",
+   "paper": "−0.470 0.158",
+   "key": "a6sys.M1+Mens · C1.both"
+  },
+  {
+   "id": "N186",
+   "section": "Table A1 (p. 11)",
+   "label": "M1 + Mens, C2: log score, Brier",
+   "paper": "−0.461 0.156",
+   "key": "a6sys.M1+Mens · C2.both"
+  },
+  {
+   "id": "N187",
+   "section": "Table A1 (p. 11)",
+   "label": "M1 + Mens, C3: log score, Brier",
+   "paper": "−0.451 0.154",
+   "key": "a6sys.M1+Mens · C3.both"
+  },
+  {
+   "id": "N188",
+   "section": "Table A1 (p. 11)",
+   "label": "M1 + Mens, C4: log score, Brier",
+   "paper": "−0.449 0.154",
+   "key": "a6sys.M1+Mens · C4.both"
+  },
+  {
+   "id": "N189",
+   "section": "Table A1 (p. 11)",
+   "label": "Superforecaster median + M1 + Mens, C1: log score, Brier",
+   "paper": "−0.420 0.138",
+   "key": "a6sys.H_S+M1+Mens · C1.both"
+  },
+  {
+   "id": "N190",
+   "section": "Table A1 (p. 11)",
+   "label": "Superforecaster median + M1 + Mens, C2: log score, Brier",
+   "paper": "−0.396 0.132",
+   "key": "a6sys.H_S+M1+Mens · C2.both"
+  },
+  {
+   "id": "N191",
+   "section": "Table A1 (p. 11)",
+   "label": "Public median + M1 + Mens, C1: log score, Brier",
+   "paper": "−0.457 0.151",
+   "key": "a6sys.H_P+M1+Mens · C1.both"
+  },
+  {
+   "id": "N192",
+   "section": "Table A1 (p. 11)",
+   "label": "Public median + M1 + Mens, C2: log score, Brier",
+   "paper": "−0.448 0.149",
+   "key": "a6sys.H_P+M1+Mens · C2.both"
+  },
+  {
+   "id": "N193",
+   "section": "Table A1 (p. 11)",
+   "label": "targets",
+   "paper": "578",
+   "key": "a6.n_targets"
+  },
+  {
+   "id": "N194",
+   "section": "Table A1 (p. 11), note",
+   "label": "single source M1: log score, Brier",
+   "paper": "−0.448 / 0.153",
+   "key": "a6sys.M1.both"
+  },
+  {
+   "id": "N195",
+   "section": "Table A1 (p. 11), note",
+   "label": "single source Mens: log score, Brier",
+   "paper": "−0.511 / 0.173",
+   "key": "a6sys.Mens.both"
+  },
+  {
+   "id": "N196",
+   "section": "Table A1 (p. 11), note",
+   "label": "single source superforecaster median: log score, Brier",
+   "paper": "−0.351 / 0.118",
+   "key": "a6sys.H_S.both"
+  },
+  {
+   "id": "N197",
+   "section": "Table A1 (p. 11), note",
+   "label": "single source public median: log score, Brier",
+   "paper": "−0.466 / 0.154",
+   "key": "a6sys.H_P.both"
+  },
+  {
+   "id": "N198",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "bootstrap draws",
+   "paper": "2,000",
+   "key": "a6.draws"
+  },
+  {
+   "id": "N199",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1, C1: log score",
+   "paper": "+0.063 [+0.040, +0.090]",
+   "key": "a6cmp.H_S+M1 · C1 vs M1.log"
+  },
+  {
+   "id": "N200",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1, C1: Brier",
+   "paper": "+0.024 [+0.015, +0.035]",
+   "key": "a6cmp.H_S+M1 · C1 vs M1.brier"
+  },
+  {
+   "id": "N201",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1 + Mens, C1: log score",
+   "paper": "+0.085 [+0.066, +0.105]",
+   "key": "a6cmp.H_S+M1 · C1 vs M1+Mens · C1.log"
+  },
+  {
+   "id": "N202",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1 + Mens, C1: Brier",
+   "paper": "+0.029 [+0.021, +0.038]",
+   "key": "a6cmp.H_S+M1 · C1 vs M1+Mens · C1.brier"
+  },
+  {
+   "id": "N203",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1, C2: log score",
+   "paper": "+0.073 [+0.047, +0.102]",
+   "key": "a6cmp.H_S+M1 · C2 vs M1.log"
+  },
+  {
+   "id": "N204",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1, C2: Brier",
+   "paper": "+0.027 [+0.017, +0.038]",
+   "key": "a6cmp.H_S+M1 · C2 vs M1.brier"
+  },
+  {
+   "id": "N205",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1 + Mens, C2: log score",
+   "paper": "+0.086 [+0.064, +0.108]",
+   "key": "a6cmp.H_S+M1 · C2 vs M1+Mens · C2.log"
+  },
+  {
+   "id": "N206",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1 + Mens, C2: Brier",
+   "paper": "+0.029 [+0.020, +0.039]",
+   "key": "a6cmp.H_S+M1 · C2 vs M1+Mens · C2.brier"
+  },
+  {
+   "id": "N207",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1, C3: log score",
+   "paper": "+0.097 [+0.060, +0.140]",
+   "key": "a6cmp.H_S+M1 · C3 vs M1.log"
+  },
+  {
+   "id": "N208",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1, C3: Brier",
+   "paper": "+0.035 [+0.020, +0.052]",
+   "key": "a6cmp.H_S+M1 · C3 vs M1.brier"
+  },
+  {
+   "id": "N209",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1 + Mens, C3: log score",
+   "paper": "+0.100 [+0.060, +0.142]",
+   "key": "a6cmp.H_S+M1 · C3 vs M1+Mens · C3.log"
+  },
+  {
+   "id": "N210",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1 + Mens, C3: Brier",
+   "paper": "+0.036 [+0.020, +0.052]",
+   "key": "a6cmp.H_S+M1 · C3 vs M1+Mens · C3.brier"
+  },
+  {
+   "id": "N211",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1, C4: log score",
+   "paper": "+0.097 [+0.060, +0.140]",
+   "key": "a6cmp.H_S+M1 · C4 vs M1.log"
+  },
+  {
+   "id": "N212",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1, C4: Brier",
+   "paper": "+0.035 [+0.020, +0.052]",
+   "key": "a6cmp.H_S+M1 · C4 vs M1.brier"
+  },
+  {
+   "id": "N213",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1 + Mens, C4: log score",
+   "paper": "+0.099 [+0.060, +0.141]",
+   "key": "a6cmp.H_S+M1 · C4 vs M1+Mens · C4.log"
+  },
+  {
+   "id": "N214",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 vs M1 + Mens, C4: Brier",
+   "paper": "+0.035 [+0.020, +0.052]",
+   "key": "a6cmp.H_S+M1 · C4 vs M1+Mens · C4.brier"
+  },
+  {
+   "id": "N215",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1, C1: log score",
+   "paper": "+0.008 [−0.014, +0.034]",
+   "key": "a6cmp.H_P+M1 · C1 vs M1.log"
+  },
+  {
+   "id": "N216",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1, C1: Brier",
+   "paper": "+0.007 [−0.002, +0.016]",
+   "key": "a6cmp.H_P+M1 · C1 vs M1.brier"
+  },
+  {
+   "id": "N217",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1 + Mens, C1: log score",
+   "paper": "+0.030 [+0.013, +0.048]",
+   "key": "a6cmp.H_P+M1 · C1 vs M1+Mens · C1.log"
+  },
+  {
+   "id": "N218",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1 + Mens, C1: Brier",
+   "paper": "+0.012 [+0.004, +0.020]",
+   "key": "a6cmp.H_P+M1 · C1 vs M1+Mens · C1.brier"
+  },
+  {
+   "id": "N219",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1, C2: log score",
+   "paper": "+0.013 [−0.008, +0.036]",
+   "key": "a6cmp.H_P+M1 · C2 vs M1.log"
+  },
+  {
+   "id": "N220",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1, C2: Brier",
+   "paper": "+0.008 [−0.001, +0.017]",
+   "key": "a6cmp.H_P+M1 · C2 vs M1.brier"
+  },
+  {
+   "id": "N221",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1 + Mens, C2: log score",
+   "paper": "+0.026 [+0.008, +0.043]",
+   "key": "a6cmp.H_P+M1 · C2 vs M1+Mens · C2.log"
+  },
+  {
+   "id": "N222",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1 + Mens, C2: Brier",
+   "paper": "+0.010 [+0.002, +0.018]",
+   "key": "a6cmp.H_P+M1 · C2 vs M1+Mens · C2.brier"
+  },
+  {
+   "id": "N223",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1, C3: log score",
+   "paper": "+0.004 [−0.007, +0.031]",
+   "key": "a6cmp.H_P+M1 · C3 vs M1.log"
+  },
+  {
+   "id": "N224",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1, C3: Brier",
+   "paper": "+0.005 [−0.001, +0.017]",
+   "key": "a6cmp.H_P+M1 · C3 vs M1.brier"
+  },
+  {
+   "id": "N225",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1 + Mens, C3: log score",
+   "paper": "+0.007 [−0.006, +0.033]",
+   "key": "a6cmp.H_P+M1 · C3 vs M1+Mens · C3.log"
+  },
+  {
+   "id": "N226",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1 + Mens, C3: Brier",
+   "paper": "+0.005 [−0.001, +0.017]",
+   "key": "a6cmp.H_P+M1 · C3 vs M1+Mens · C3.brier"
+  },
+  {
+   "id": "N227",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1, C4: log score",
+   "paper": "+0.009 [−0.003, +0.035]",
+   "key": "a6cmp.H_P+M1 · C4 vs M1.log"
+  },
+  {
+   "id": "N228",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1, C4: Brier",
+   "paper": "+0.005 [−0.000, +0.018]",
+   "key": "a6cmp.H_P+M1 · C4 vs M1.brier"
+  },
+  {
+   "id": "N229",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1 + Mens, C4: log score",
+   "paper": "+0.011 [−0.002, +0.036]",
+   "key": "a6cmp.H_P+M1 · C4 vs M1+Mens · C4.log"
+  },
+  {
+   "id": "N230",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 vs M1 + Mens, C4: Brier",
+   "paper": "+0.006 [−0.000, +0.018]",
+   "key": "a6cmp.H_P+M1 · C4 vs M1+Mens · C4.brier"
+  },
+  {
+   "id": "N231",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + Mens vs Mens, C1: log score",
+   "paper": "+0.095 [+0.075, +0.115]",
+   "key": "a6cmp.H_S+Mens · C1 vs Mens.log"
+  },
+  {
+   "id": "N232",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + Mens vs Mens, C1: Brier",
+   "paper": "+0.039 [+0.029, +0.049]",
+   "key": "a6cmp.H_S+Mens · C1 vs Mens.brier"
+  },
+  {
+   "id": "N233",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + Mens vs Mens, C2: log score",
+   "paper": "+0.126 [+0.101, +0.153]",
+   "key": "a6cmp.H_S+Mens · C2 vs Mens.log"
+  },
+  {
+   "id": "N234",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + Mens vs Mens, C2: Brier",
+   "paper": "+0.047 [+0.036, +0.059]",
+   "key": "a6cmp.H_S+Mens · C2 vs Mens.brier"
+  },
+  {
+   "id": "N235",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + Mens vs Mens, C3: log score",
+   "paper": "+0.161 [+0.124, +0.197]",
+   "key": "a6cmp.H_S+Mens · C3 vs Mens.log"
+  },
+  {
+   "id": "N236",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + Mens vs Mens, C3: Brier",
+   "paper": "+0.055 [+0.040, +0.070]",
+   "key": "a6cmp.H_S+Mens · C3 vs Mens.brier"
+  },
+  {
+   "id": "N237",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + Mens vs Mens, C4: log score",
+   "paper": "+0.161 [+0.125, +0.197]",
+   "key": "a6cmp.H_S+Mens · C4 vs Mens.log"
+  },
+  {
+   "id": "N238",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + Mens vs Mens, C4: Brier",
+   "paper": "+0.055 [+0.040, +0.070]",
+   "key": "a6cmp.H_S+Mens · C4 vs Mens.brier"
+  },
+  {
+   "id": "N239",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + Mens vs Mens, C1: log score",
+   "paper": "+0.038 [+0.019, +0.057]",
+   "key": "a6cmp.H_P+Mens · C1 vs Mens.log"
+  },
+  {
+   "id": "N240",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + Mens vs Mens, C1: Brier",
+   "paper": "+0.017 [+0.008, +0.027]",
+   "key": "a6cmp.H_P+Mens · C1 vs Mens.brier"
+  },
+  {
+   "id": "N241",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + Mens vs Mens, C2: log score",
+   "paper": "+0.043 [+0.023, +0.063]",
+   "key": "a6cmp.H_P+Mens · C2 vs Mens.log"
+  },
+  {
+   "id": "N242",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + Mens vs Mens, C2: Brier",
+   "paper": "+0.019 [+0.009, +0.029]",
+   "key": "a6cmp.H_P+Mens · C2 vs Mens.brier"
+  },
+  {
+   "id": "N243",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + Mens vs Mens, C3: log score",
+   "paper": "+0.042 [+0.016, +0.083]",
+   "key": "a6cmp.H_P+Mens · C3 vs Mens.log"
+  },
+  {
+   "id": "N244",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + Mens vs Mens, C3: Brier",
+   "paper": "+0.018 [+0.007, +0.036]",
+   "key": "a6cmp.H_P+Mens · C3 vs Mens.brier"
+  },
+  {
+   "id": "N245",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + Mens vs Mens, C4: log score",
+   "paper": "+0.044 [+0.018, +0.083]",
+   "key": "a6cmp.H_P+Mens · C4 vs Mens.log"
+  },
+  {
+   "id": "N246",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + Mens vs Mens, C4: Brier",
+   "paper": "+0.019 [+0.008, +0.036]",
+   "key": "a6cmp.H_P+Mens · C4 vs Mens.brier"
+  },
+  {
+   "id": "N247",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 + Mens vs M1 + Mens, C1: log score",
+   "paper": "+0.050 [+0.037, +0.064]",
+   "key": "a6cmp.H_S+M1+Mens · C1 vs M1+Mens · C1.log"
+  },
+  {
+   "id": "N248",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 + Mens vs M1 + Mens, C1: Brier",
+   "paper": "+0.020 [+0.014, +0.027]",
+   "key": "a6cmp.H_S+M1+Mens · C1 vs M1+Mens · C1.brier"
+  },
+  {
+   "id": "N249",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 + Mens vs M1 + Mens, C2: log score",
+   "paper": "+0.065 [+0.048, +0.082]",
+   "key": "a6cmp.H_S+M1+Mens · C2 vs M1+Mens · C2.log"
+  },
+  {
+   "id": "N250",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 + Mens vs M1 + Mens, C2: Brier",
+   "paper": "+0.024 [+0.017, +0.032]",
+   "key": "a6cmp.H_S+M1+Mens · C2 vs M1+Mens · C2.brier"
+  },
+  {
+   "id": "N251",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 + Mens vs M1 + Mens, C1: log score",
+   "paper": "+0.013 [+0.001, +0.025]",
+   "key": "a6cmp.H_P+M1+Mens · C1 vs M1+Mens · C1.log"
+  },
+  {
+   "id": "N252",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 + Mens vs M1 + Mens, C1: Brier",
+   "paper": "+0.007 [+0.002, +0.013]",
+   "key": "a6cmp.H_P+M1+Mens · C1 vs M1+Mens · C1.brier"
+  },
+  {
+   "id": "N253",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 + Mens vs M1 + Mens, C2: log score",
+   "paper": "+0.013 [+0.001, +0.026]",
+   "key": "a6cmp.H_P+M1+Mens · C2 vs M1+Mens · C2.log"
+  },
+  {
+   "id": "N254",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 + Mens vs M1 + Mens, C2: Brier",
+   "paper": "+0.007 [+0.002, +0.013]",
+   "key": "a6cmp.H_P+M1+Mens · C2 vs M1+Mens · C2.brier"
+  },
+  {
+   "id": "N255",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 + Mens vs superforecaster median + Mens, C1: log score",
+   "paper": "−0.004 [−0.012, +0.003]",
+   "key": "a6cmp.H_S+M1+Mens · C1 vs H_S+Mens · C1.log"
+  },
+  {
+   "id": "N256",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 + Mens vs superforecaster median + Mens, C1: Brier",
+   "paper": "−0.004 [−0.007, −0.000]",
+   "key": "a6cmp.H_S+M1+Mens · C1 vs H_S+Mens · C1.brier"
+  },
+  {
+   "id": "N257",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 + Mens vs superforecaster median + Mens, C2: log score",
+   "paper": "−0.011 [−0.020, −0.003]",
+   "key": "a6cmp.H_S+M1+Mens · C2 vs H_S+Mens · C2.log"
+  },
+  {
+   "id": "N258",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Superforecaster median + M1 + Mens vs superforecaster median + Mens, C2: Brier",
+   "paper": "−0.005 [−0.009, −0.002]",
+   "key": "a6cmp.H_S+M1+Mens · C2 vs H_S+Mens · C2.brier"
+  },
+  {
+   "id": "N259",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 + Mens vs public median + Mens, C1: log score",
+   "paper": "+0.016 [+0.007, +0.025]",
+   "key": "a6cmp.H_P+M1+Mens · C1 vs H_P+Mens · C1.log"
+  },
+  {
+   "id": "N260",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 + Mens vs public median + Mens, C1: Brier",
+   "paper": "+0.005 [+0.000, +0.009]",
+   "key": "a6cmp.H_P+M1+Mens · C1 vs H_P+Mens · C1.brier"
+  },
+  {
+   "id": "N261",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 + Mens vs public median + Mens, C2: log score",
+   "paper": "+0.021 [+0.009, +0.032]",
+   "key": "a6cmp.H_P+M1+Mens · C2 vs H_P+Mens · C2.log"
+  },
+  {
+   "id": "N262",
+   "section": "Table A2 (pp. 11–12)",
+   "label": "Public median + M1 + Mens vs public median + Mens, C2: Brier",
+   "paper": "+0.006 [+0.000, +0.010]",
+   "key": "a6cmp.H_P+M1+Mens · C2 vs H_P+Mens · C2.brier"
+  },
+  {
+   "id": "N263",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "targets",
+   "paper": "578",
+   "key": "a5.n_targets"
+  },
+  {
+   "id": "N264",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "bootstrap draws",
+   "paper": "2,000",
+   "key": "a5.draws"
+  },
+  {
+   "id": "N265",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Superforecaster prompt 1 with news: selection Brier ×100",
+   "paper": "17.37",
+   "key": "a5.Q.Claude-3-5-Sonnet-20240620 (superforecaster with news 1)"
+  },
+  {
+   "id": "N266",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Superforecaster prompt 1 with news: superforecasters, coefficient",
+   "paper": "1.48 [0.82, 2.14]",
+   "key": "a5enc.Sonnet 3.5 (superforecaster with news 1).S.beta"
+  },
+  {
+   "id": "N267",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Superforecaster prompt 1 with news: superforecasters, difference from M1",
+   "paper": "−0.31 [−0.82, 0.05]",
+   "key": "a5enc.Sonnet 3.5 (superforecaster with news 1).S.diff"
+  },
+  {
+   "id": "N268",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Superforecaster prompt 1 with news: public, coefficient",
+   "paper": "1.11 [0.44, 1.78]",
+   "key": "a5enc.Sonnet 3.5 (superforecaster with news 1).P.beta"
+  },
+  {
+   "id": "N269",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Superforecaster prompt 1 with news: public, difference from M1",
+   "paper": "0.14 [−0.31, 0.58]",
+   "key": "a5enc.Sonnet 3.5 (superforecaster with news 1).P.diff"
+  },
+  {
+   "id": "N270",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Scratchpad with news and freeze values: selection Brier ×100",
+   "paper": "17.63",
+   "key": "a5.Q.Claude-3-5-Sonnet-20240620 (scratchpad with news with freeze values)"
+  },
+  {
+   "id": "N271",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Scratchpad with news and freeze values: superforecasters, coefficient",
+   "paper": "1.41 [0.73, 2.10]",
+   "key": "a5enc.Sonnet 3.5 (scratchpad with news with freeze values).S.beta"
+  },
+  {
+   "id": "N272",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Scratchpad with news and freeze values: superforecasters, difference from M1",
+   "paper": "−0.37 [−0.76, −0.08]",
+   "key": "a5enc.Sonnet 3.5 (scratchpad with news with freeze values).S.diff"
+  },
+  {
+   "id": "N273",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Scratchpad with news and freeze values: public, coefficient",
+   "paper": "0.73 [0.11, 1.35]",
+   "key": "a5enc.Sonnet 3.5 (scratchpad with news with freeze values).P.beta"
+  },
+  {
+   "id": "N274",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Scratchpad with news and freeze values: public, difference from M1",
+   "paper": "−0.24 [−0.58, 0.09]",
+   "key": "a5enc.Sonnet 3.5 (scratchpad with news with freeze values).P.diff"
+  },
+  {
+   "id": "N275",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Scratchpad with news: selection Brier ×100",
+   "paper": "17.94",
+   "key": "a5.Q.Claude-3-5-Sonnet-20240620 (scratchpad with news)"
+  },
+  {
+   "id": "N276",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Scratchpad with news: superforecasters, coefficient",
+   "paper": "1.41 [0.74, 2.08]",
+   "key": "a5enc.Sonnet 3.5 (scratchpad with news).S.beta"
+  },
+  {
+   "id": "N277",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Scratchpad with news: superforecasters, difference from M1",
+   "paper": "−0.38 [−0.81, −0.06]",
+   "key": "a5enc.Sonnet 3.5 (scratchpad with news).S.diff"
+  },
+  {
+   "id": "N278",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Scratchpad with news: public, coefficient",
+   "paper": "0.81 [0.22, 1.40]",
+   "key": "a5enc.Sonnet 3.5 (scratchpad with news).P.beta"
+  },
+  {
+   "id": "N279",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Scratchpad with news: public, difference from M1",
+   "paper": "−0.16 [−0.50, 0.16]",
+   "key": "a5enc.Sonnet 3.5 (scratchpad with news).P.diff"
+  },
+  {
+   "id": "N280",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Scratchpad with second news: selection Brier ×100",
+   "paper": "21.36",
+   "key": "a5.Q.Claude-3-5-Sonnet-20240620 (scratchpad with SECOND news)"
+  },
+  {
+   "id": "N281",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Scratchpad with second news: superforecasters, coefficient",
+   "paper": "1.67 [0.95, 2.39]",
+   "key": "a5enc.Sonnet 3.5 (scratchpad with SECOND news).S.beta"
+  },
+  {
+   "id": "N282",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Scratchpad with second news: superforecasters, difference from M1",
+   "paper": "−0.12 [−0.54, 0.28]",
+   "key": "a5enc.Sonnet 3.5 (scratchpad with SECOND news).S.diff"
+  },
+  {
+   "id": "N283",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Scratchpad with second news: public, coefficient",
+   "paper": "1.51 [0.91, 2.11]",
+   "key": "a5enc.Sonnet 3.5 (scratchpad with SECOND news).P.beta"
+  },
+  {
+   "id": "N284",
+   "section": "Table A3 (pp. 12–13)",
+   "label": "Scratchpad with second news: public, difference from M1",
+   "paper": "0.54 [0.21, 0.89]",
+   "key": "a5enc.Sonnet 3.5 (scratchpad with SECOND news).P.diff"
+  },
+  {
+   "id": "N285",
+   "section": "Table A3 (pp. 12–13), note",
+   "label": "M1 selection-set Brier ×100",
+   "paper": "16.16",
+   "key": "a5.Q_a"
+  },
+  {
+   "id": "N286",
+   "section": "Table A4 (p. 13)",
+   "label": "Dataset, superforecasters: b_a − b_h",
+   "paper": "0.01 [−0.76, 0.78]",
+   "key": "rev.dataset.S.rev"
+  },
+  {
+   "id": "N287",
+   "section": "Table A4 (p. 13)",
+   "label": "Dataset, superforecasters: targets",
+   "paper": "521",
+   "key": "rev.dataset.S.n"
+  },
+  {
+   "id": "N288",
+   "section": "Table A4 (p. 13)",
+   "label": "Dataset, superforecasters: questions",
+   "paper": "105",
+   "key": "rev.dataset.S.ncl"
+  },
+  {
+   "id": "N289",
+   "section": "Table A4 (p. 13)",
+   "label": "Dataset, public: b_a − b_h",
+   "paper": "1.04 [0.43, 1.65]",
+   "key": "rev.dataset.P.rev"
+  },
+  {
+   "id": "N290",
+   "section": "Table A4 (p. 13)",
+   "label": "Dataset, public: targets",
+   "paper": "521",
+   "key": "rev.dataset.P.n"
+  },
+  {
+   "id": "N291",
+   "section": "Table A4 (p. 13)",
+   "label": "Dataset, public: questions",
+   "paper": "105",
+   "key": "rev.dataset.P.ncl"
+  },
+  {
+   "id": "N292",
+   "section": "Table A4 (p. 13)",
+   "label": "Market, superforecasters: b_a − b_h",
+   "paper": "−0.30 [−1.20, 0.61]",
+   "key": "rev.market.S.rev"
+  },
+  {
+   "id": "N293",
+   "section": "Table A4 (p. 13)",
+   "label": "Market, superforecasters: targets",
+   "paper": "57",
+   "key": "rev.market.S.n"
+  },
+  {
+   "id": "N294",
+   "section": "Table A4 (p. 13)",
+   "label": "Market, superforecasters: questions",
+   "paper": "57",
+   "key": "rev.market.S.ncl"
+  },
+  {
+   "id": "N295",
+   "section": "Table A4 (p. 13)",
+   "label": "Market, public: b_a − b_h",
+   "paper": "−0.61 [−1.45, 0.23]",
+   "key": "rev.market.P.rev"
+  },
+  {
+   "id": "N296",
+   "section": "Table A4 (p. 13)",
+   "label": "Market, public: targets",
+   "paper": "57",
+   "key": "rev.market.P.n"
+  },
+  {
+   "id": "N297",
+   "section": "Table A4 (p. 13)",
+   "label": "Market, public: questions",
+   "paper": "57",
+   "key": "rev.market.P.ncl"
+  }
+ ],
+ "not_recomputed": [
+  {
+   "section": "§1 (p. 1)",
+   "text": "twelve language models; 31 binary questions",
+   "reason": "cited result (Schoenegger et al., 2024)"
+  },
+  {
+   "section": "§1 (p. 1)",
+   "text": "2024 rounds of ForecastBench",
+   "reason": "cited result (Karger et al., 2025)"
+  },
+  {
+   "section": "§2.1 (p. 2)",
+   "text": "snapshot fixed on 2026-09-06",
+   "reason": "provenance date; the hashes and commit are checked in the provenance cell"
+  },
+  {
+   "section": "§2.1 (p. 2)",
+   "text": "39 superforecasters recruited (Karger et al., 2025, p. 7)",
+   "reason": "cited count"
+  },
+  {
+   "section": "§2.1 (p. 2)",
+   "text": "question sets ten days before the due date; models 24 hours before",
+   "reason": "ForecastBench procedure (Karger et al., 2025, p. 5)"
+  },
+  {
+   "section": "§2.1 (p. 2)",
+   "text": "20 random questions from the 200-question human set; one-hour survey",
+   "reason": "ForecastBench procedure (p. 7)"
+  },
+  {
+   "section": "§2.1 (p. 2)",
+   "text": "nine-day exercise; 20 assigned questions; group stage about halfway",
+   "reason": "ForecastBench procedure (p. 7)"
+  },
+  {
+   "section": "§2.2 (p. 3)",
+   "text": "missing forecasts filled with 0.5",
+   "reason": "ForecastBench procedure"
+  },
+  {
+   "section": "§2.4 (p. 3)",
+   "text": "SPEC v1 locked 2026-09-06; SPEC v2 locked 2026-09-08",
+   "reason": "dates recorded in the git history of specs/"
+  },
+  {
+   "section": "§2.4 (p. 3)",
+   "text": "Claude Fable 5.1; September and October 2026",
+   "reason": "authorship note"
+  },
+  {
+   "section": "References, Data and code availability",
+   "text": "years, volumes, pages, DOIs",
+   "reason": "bibliographic"
+  }
+ ]
+}
