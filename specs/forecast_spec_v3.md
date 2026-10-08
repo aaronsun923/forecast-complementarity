@@ -73,3 +73,36 @@ Locked reading.
 ## Reporting
 
 docs/amendment5b_REPORT.md, docs/amendment5_REPORT.md, docs/amendment6_REPORT.md. Coefficients to 2 decimals, score differences to 3, with the same conventions as the v1 and v2 reports. Each report restates the locked reading and says which branch the numbers fall into, in one sentence, before any discussion.
+
+## Amendment 7. Per-variant per-forecaster gain (LOCKED 2026-10-08, before computation)
+
+Status: LOCKED 2026-10-08, committed before code/amendment7.py was written or run.
+
+Purpose: Section 3 ("Which model is the ruler") of the methods paper "Relative to what?". The v2 report gives per-variant point estimates of the per-forecaster gain over each of the 34 matched variants but no intervals. This amendment adds question-clustered intervals under both scoring rules, and the reference curve's own gain over each variant, which Amendment 2 reports only as a human-minus-reference difference. Nothing here changes any P5 number.
+
+Reads only: the existing derived frame used by v1 H1 (33,334 forecaster-target rows, 578 targets, 162 questions; v1 Amendment 2 row exclusions applied) and the 34 matched-variant forecasts already loaded by v2common. No new download.
+
+### Quantities
+
+1. Per-forecaster gain over variant m, for each of the 34 variants:
+   - G_B(m) = Brier(m) − Brier(human), per row, as v1 H1 defines G_a with m in place of baseline (a).
+   - G_L(m) = log score(human) − log score(m), per row, probabilities clipped to [0.01, 0.99], the v1/v2 convention (v1 Amendment 3 G_log).
+   - Rows where m's forecast is imputed are dropped for that variant only; report the row count per variant.
+   - Mean by group (S, P), ×100 for Brier as in v1, natural units for log. 95% interval: question-level cluster bootstrap, 2,000 draws, seed 20260906, percentile.
+2. Reference curve's own gain over variant m: the leave-one-out median of the other 33 variants (the v2 Amendment 2 reference object, same folds, seed, clipping and target set) against m, as the cross-fitted log-score gain and the Brier gain, with the same bootstrap. This is the "vertical difference" table's missing row: reference minus m, not human minus reference.
+3. Counts: for each group and each rule, the number of variants (of 34) whose interval lies entirely above zero, entirely below zero, or includes zero.
+
+### Reading, fixed before the run
+
+- 34 variants are not 34 independent tests. The paper reports the curve and the counts in item 3, with the variants ordered by selection-set Q. No per-variant p-values enter the paper.
+- Recorded expectation from the v2 point estimates: superforecasters positive against all 34 under Brier; public positive against about 6 and negative against about 28. Whether the sign flip for the public group survives the intervals is what the counts show; the paper reports the counts whatever they are.
+- Scoring-rule check for Section 5: for each variant, whether the sign of the point estimate differs between G_B and G_L, and whether an interval excludes zero under one rule and not the other. If no variant moves, Section 5 gets one sentence; if any does, the variant is named.
+
+### Output
+
+- code/amendment7.py (reuses v2common and the v2 Amendment 2 reference code; no new modelling).
+- docs/amendment7_REPORT.md: one table per group with 34 rows (variant, scaffold, Q, n rows, G_B mean and interval, G_L mean and interval), one table for the reference gain (34 rows, both rules), the count table, the rule-disagreement list, and the usual header (frame size, seed, clip, git commit of the spec).
+- docs/amendment7_pervariant.csv with every number in the tables.
+- figures/amd7_gain_curve.png: G_B and G_L against Q, both groups, with intervals; reference curve overlaid.
+
+Reproduction check: G_B against M1 (Claude-3-5-Sonnet-20240620 zero shot with freeze values) must reproduce v1 H1 exactly (+3.38 [1.36, 5.41] S; −7.81 [−9.69, −5.92] P) before any other variant is reported. If it does not, stop and report.
