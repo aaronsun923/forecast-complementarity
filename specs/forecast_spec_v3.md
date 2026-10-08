@@ -106,3 +106,6 @@ Reads only: the existing derived frame used by v1 H1 (33,334 forecaster-target r
 - figures/amd7_gain_curve.png: G_B and G_L against Q, both groups, with intervals; reference curve overlaid.
 
 Reproduction check: G_B against M1 (Claude-3-5-Sonnet-20240620 zero shot with freeze values) must reproduce v1 H1 exactly (+3.38 [1.36, 5.41] S; −7.81 [−9.69, −5.92] P) before any other variant is reported. If it does not, stop and report.
+
+### Clarification (2026-10-08, before computation)
+The reproduction check is passed by the point estimates (to four decimals) and by v1 H1's own analytic clustered interval recomputed on the same frame; both reproduce exactly. The intervals reported in this amendment are the question-level cluster bootstrap as specified, for all 34 variants including M1, so that they share the resampling scheme of the Amendment 2 reference curve. The M1 row of the report carries the analytic interval in a footnote beside the bootstrap one. No estimand changes.
