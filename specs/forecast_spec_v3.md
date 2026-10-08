@@ -109,3 +109,6 @@ Reproduction check: G_B against M1 (Claude-3-5-Sonnet-20240620 zero shot with fr
 
 ### Clarification (2026-10-08, before computation)
 The reproduction check is passed by the point estimates (to four decimals) and by v1 H1's own analytic clustered interval recomputed on the same frame; both reproduce exactly. The intervals reported in this amendment are the question-level cluster bootstrap as specified, for all 34 variants including M1, so that they share the resampling scheme of the Amendment 2 reference curve. The M1 row of the report carries the analytic interval in a footnote beside the bootstrap one. No estimand changes.
+
+### Note 2 (2026-10-08, after results, descriptive addition, no estimate changes)
+Item 2's log-score reference gain is the Amendment 2 cross-fitted combination gain (reference added to m). Item 1's G_L is a substitution gain (human in place of m). So that the log panel compares like with like, the reference's substitution gain, log score(reference median) − log score(m) per target under the same clip, is added with the same bootstrap and plotted beside the human G_L curve. The combination gain stays in the table as specified. The Brier panel already compares substitution with substitution.
