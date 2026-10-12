@@ -112,3 +112,56 @@ The reproduction check is passed by the point estimates (to four decimals) and b
 
 ### Note 2 (2026-10-08, after results, descriptive addition, no estimate changes)
 Item 2's log-score reference gain is the Amendment 2 cross-fitted combination gain (reference added to m). Item 1's G_L is a substitution gain (human in place of m). So that the log panel compares like with like, the reference's substitution gain, log score(reference median) − log score(m) per target under the same clip, is added with the same bootstrap and plotted beside the human G_L curve. The combination gain stays in the table as specified. The Brier panel already compares substitution with substitution.
+
+## Amendment 8. Leaderboard levels and equivalent model upgrade
+
+Status: LOCKED 2026-10-11, committed before code/amendment8.py is written or run.
+
+Purpose: Section 10 ("Choosing the ruler") of the methods paper "Relative to What?". Amendments 6 and 7 measure the human result against each model. This amendment puts people and models on one leaderboard and expresses the human contribution in units a reader can act on. Three readers, three readouts: a person (does averaging my forecast with the AI I use beat the AI alone?), an institution (how far up the leaderboard does adding the human move a model?), and a researcher (where do human groups sit among all available models?). Nothing here changes any v1, v2, P5 or Amendment 6/7 number.
+
+Reads only: data/derived/full_frame.pkl (the v1 H1 frame: 33,334 forecaster-target rows, 578 targets, 162 questions; v1 Amendment 2 exclusions) and the 34 matched-variant forecasts already loaded for Amendment 7. No new download, no new model run.
+
+Conventions (all as in Amendments 6 and 7): Brier ×100; log score with probabilities clipped to [0.01, 0.99]; question-level cluster bootstrap, 2,000 draws, seed 20260906, percentile 95%, one set of question draws for every quantity; folds by question, 5 folds, fold seed 20260908; combiner C1 = equal-weight linear pool (p + q)/2, C3 = training-fold Brier-optimal linear pool with weights in [0, 1] summing to 1. Rows where a variant's forecast is imputed or missing are dropped for that variant only; report counts.
+
+### Quantities
+
+1. Leaderboard of levels (researcher; substitution question).
+   - Shared target set T: targets where all 34 variants have non-imputed forecasts AND both the public median and the superforecaster median exist. Report |T|. If |T| < 300, also report the leaderboard on the larger set where all 34 variants and the public median exist, labelled as such.
+   - Entries: the 34 variants; the public median (per-target median of public forecasts, as in v1); the superforecaster median; and, as a reference line only, the mean individual public forecaster and the mean individual superforecaster (mean over that group's forecaster-target rows on T).
+   - Score per entry: mean Brier and mean log score over T. Rank among the 34 variants plus the entry itself (rank 1 = best).
+   - Bootstrap rank interval for the public median and the superforecaster median: in each draw, re-score all entries on the resampled targets and record the human entry's rank among the 34 variants.
+
+2. Averaging rule for an individual (person).
+   - For each forecaster-target row (public and superforecaster) and each variant m: A = (h + m)/2, the C1 pool of that forecaster's own forecast with m. No fitting.
+   - Per variant m and group g in {P, S}: mean over rows of score(m) − score(A) (gain of averaging over using the AI alone) and score(h) − score(A) (gain over using one's own forecast alone), both rules.
+   - Share of forecasters helped: among forecasters in g with at least 10 non-imputed rows for m, the share whose own mean score(m) − score(A) is above zero. Report the share and the number of forecasters.
+   - Threshold readout: the best-ranked variant (by selection-set Q, as in Figure 1) against which the averaging gain's interval lies entirely above zero, separately for P and S, both rules.
+
+3. Equivalent model upgrade (institution; addition question).
+   - For each variant m and each group median g in {public, superforecaster}: held-out score of the combination m + g, computed as in Amendment 6 (5-fold out-of-fold predictions on T), under C1 (primary) and C3 (secondary; descriptive only if any weight's fold-to-fold SD exceeds 0.2, the Amendment 6 rule).
+   - Rank of m alone and rank of m + g among the 34 standalone variants on T. Equivalent upgrade U(m, g) = rank(m) − rank(m + g), in places.
+   - Gap closed: for m other than the top-ranked variant, F(m, g) = [score(m) − score(m + g)] / [score(m) − score(best variant)], the share of the distance to the best standalone model that adding g covers (above 1 = the combination beats the best model). For the top-ranked variant, report score(best) − score(best + g) directly.
+   - Intervals for U and F from the shared bootstrap (refit C3 inside each draw).
+
+### Reading, fixed before the run
+
+- All three items are descriptive readouts for Section 10. No new hypothesis test, no per-variant p-values. 34 variants are not 34 tests.
+- Item 1 is reported as ranks with intervals and one figure (dot plot of the 34 variants' scores, human entries marked).
+- Item 2's threshold is the sentence the paper uses for a person: "averaging your forecast with the model helps against models at or below rank X". If no variant has an interval entirely above zero for a group, the sentence says so.
+- Item 3 is reported for three anchor variants in the text (top-ranked, median-ranked, bottom-ranked by selection-set Q) and for all 34 in a table and one figure (U against rank of m).
+- Recorded expectation, from Amendments 6 and 7 point estimates, written before the run so it can be checked: the superforecaster median ranks above every variant; the public median ranks in the lower half; averaging helps the public against weaker models only; for the public median, U is near zero for the top variant and positive for low-ranked variants.
+- If log score and Brier disagree on a readout, report both and state the disagreement in one sentence.
+
+### Output
+
+- code/amendment8.py; docs/amendment8_REPORT.md; docs/amendment8_leaderboard.csv, docs/amendment8_averaging.csv, docs/amendment8_upgrade.csv; docs/figures/a8_leaderboard.png, docs/figures/a8_upgrade.png.
+- Report opens with the |T| count and a reproduction check: the Amendment 7 G_B(M1) for both groups recomputed on the Amendment 8 rows where the row sets coincide.
+- No commit of data files. Aaron reads the report before anything is committed.
+
+### Clarifications (pre-run, 2026-10-11)
+
+1. Item 2 uses every row where m's forecast is non-imputed, not only rows on T. The reproduction check compares Amendment 7's G_B(M1) on those rows.
+2. Two orderings, each with one job. Selection-set Q (as in Figure 1) orders the three anchor variants and sets item 2's threshold. Score on T orders variants for ranks, U, F and "top-ranked / best variant" in items 1 and 3. Report the Spearman correlation between the two orderings.
+3. Item 3 reports both rules, log score primary and Brier beside it, as in Amendment 6.
+4. Inside each bootstrap draw, folds are reassigned on the draw's clusters, as in Amendments 6 and 7, and C3 is refit.
+5. Item 3 uses the 530 targets in T, not Amendment 6's 578, so m + g scores are not expected to reproduce Amendment 6. The report says so in one sentence.
