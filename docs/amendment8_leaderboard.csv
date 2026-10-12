@@ -1,0 +1,77 @@
+entry,kind,rule,score,rank,rank_lo,rank_hi,Q,Q_rank
+Claude-3-5-Sonnet-20240620 (zero shot with freeze values),variant,log,-0.447300,2,,,0.161627,1.000000
+Claude-3-5-Sonnet-20240620 (scratchpad with freeze values),variant,log,-0.422730,1,,,0.163355,2.000000
+GPT-4-Turbo-2024-04-09 (zero shot with freeze values),variant,log,-0.475191,4,,,0.175600,3.000000
+Claude-3-Opus-20240229 (scratchpad with freeze values),variant,log,-0.488721,6,,,0.177335,4.000000
+GPT-4-Turbo-2024-04-09 (scratchpad with freeze values),variant,log,-0.545464,15,,,0.177554,5.000000
+Gemini-1.5-Pro (scratchpad with freeze values),variant,log,-0.493603,7,,,0.177935,6.000000
+Qwen1.5-110B-Chat (scratchpad with freeze values),variant,log,-0.539765,13,,,0.181775,7.000000
+Claude-3-Opus-20240229 (zero shot with freeze values),variant,log,-0.474957,3,,,0.183570,8.000000
+GPT-4o (scratchpad with freeze values),variant,log,-0.487696,5,,,0.187465,9.000000
+GPT-4-0613 (zero shot with freeze values),variant,log,-0.517239,9,,,0.187693,10.000000
+Llama-3-8b-Chat-Hf (zero shot with freeze values),variant,log,-0.624775,25,,,0.191808,11.000000
+Qwen1.5-110B-Chat (zero shot with freeze values),variant,log,-0.557358,18,,,0.191983,12.000000
+GPT-4-0613 (scratchpad with freeze values),variant,log,-0.518796,10,,,0.193735,13.000000
+Gemini-1.5-Pro (zero shot with freeze values),variant,log,-0.519078,11,,,0.198552,14.000000
+Mistral-Large-Latest (scratchpad with freeze values),variant,log,-0.510628,8,,,0.198929,15.000000
+Mixtral-8x22B-Instruct-V0.1 (scratchpad with freeze values),variant,log,-0.545602,16,,,0.199132,16.000000
+Mixtral-8x7B-Instruct-V0.1 (zero shot with freeze values),variant,log,-0.694558,31,,,0.200622,17.000000
+Mixtral-8x22B-Instruct-V0.1 (zero shot with freeze values),variant,log,-0.560266,19,,,0.205319,18.000000
+GPT-4o (zero shot with freeze values),variant,log,-0.556795,17,,,0.206353,19.000000
+Mistral-Large-Latest (zero shot with freeze values),variant,log,-0.537141,12,,,0.207172,20.000000
+Llama-3-70b-Chat-Hf (zero shot with freeze values),variant,log,-0.560301,20,,,0.207543,21.000000
+Llama-3-70b-Chat-Hf (scratchpad with freeze values),variant,log,-0.575218,21,,,0.207700,22.000000
+Gemini-1.5-Flash (scratchpad with freeze values),variant,log,-0.597325,23,,,0.209086,23.000000
+Claude-2.1 (zero shot with freeze values),variant,log,-0.618877,24,,,0.209289,24.000000
+Gemini-1.5-Flash (zero shot with freeze values),variant,log,-0.544055,14,,,0.213648,25.000000
+Mixtral-8x7B-Instruct-V0.1 (scratchpad with freeze values),variant,log,-0.596670,22,,,0.231013,26.000000
+Llama-3-8b-Chat-Hf (scratchpad with freeze values),variant,log,-0.646995,27,,,0.235254,27.000000
+Claude-2.1 (scratchpad with freeze values),variant,log,-0.637611,26,,,0.243103,28.000000
+Claude-3-Haiku-20240307 (scratchpad with freeze values),variant,log,-0.672201,30,,,0.243503,29.000000
+Llama-2-70b-Chat-Hf (scratchpad with freeze values),variant,log,-0.665417,28,,,0.250133,30.000000
+Llama-2-70b-Chat-Hf (zero shot with freeze values),variant,log,-0.671798,29,,,0.258195,31.000000
+GPT-3.5-Turbo-0125 (scratchpad with freeze values),variant,log,-0.703474,32,,,0.264191,32.000000
+Claude-3-Haiku-20240307 (zero shot with freeze values),variant,log,-0.826447,33,,,0.284118,33.000000
+GPT-3.5-Turbo-0125 (zero shot with freeze values),variant,log,-1.135735,34,,,0.397350,34.000000
+public median,human median,log,-0.474572,3,2.000000,11.000000,,
+superforecaster median,human median,log,-0.358928,1,1.000000,1.000000,,
+mean individual superforecaster,reference line,log,-0.340727,1,,,,
+mean individual public forecaster,reference line,log,-0.734778,33,,,,
+Claude-3-5-Sonnet-20240620 (zero shot with freeze values),variant,brier,15.325220,2,,,0.161627,1.000000
+Claude-3-5-Sonnet-20240620 (scratchpad with freeze values),variant,brier,14.400097,1,,,0.163355,2.000000
+GPT-4-Turbo-2024-04-09 (zero shot with freeze values),variant,brier,16.325972,3,,,0.175600,3.000000
+Claude-3-Opus-20240229 (scratchpad with freeze values),variant,brier,16.809646,6,,,0.177335,4.000000
+GPT-4-Turbo-2024-04-09 (scratchpad with freeze values),variant,brier,18.611231,14,,,0.177554,5.000000
+Gemini-1.5-Pro (scratchpad with freeze values),variant,brier,16.716934,5,,,0.177935,6.000000
+Qwen1.5-110B-Chat (scratchpad with freeze values),variant,brier,18.461792,12,,,0.181775,7.000000
+Claude-3-Opus-20240229 (zero shot with freeze values),variant,brier,16.438937,4,,,0.183570,8.000000
+GPT-4o (scratchpad with freeze values),variant,brier,16.934472,7,,,0.187465,9.000000
+GPT-4-0613 (zero shot with freeze values),variant,brier,17.575444,10,,,0.187693,10.000000
+Llama-3-8b-Chat-Hf (zero shot with freeze values),variant,brier,20.517979,22,,,0.191808,11.000000
+Qwen1.5-110B-Chat (zero shot with freeze values),variant,brier,19.421313,18,,,0.191983,12.000000
+GPT-4-0613 (scratchpad with freeze values),variant,brier,17.569415,9,,,0.193735,13.000000
+Gemini-1.5-Pro (zero shot with freeze values),variant,brier,18.116624,11,,,0.198552,14.000000
+Mistral-Large-Latest (scratchpad with freeze values),variant,brier,17.059755,8,,,0.198929,15.000000
+Mixtral-8x22B-Instruct-V0.1 (scratchpad with freeze values),variant,brier,18.742925,15,,,0.199132,16.000000
+Mixtral-8x7B-Instruct-V0.1 (zero shot with freeze values),variant,brier,22.409748,26,,,0.200622,17.000000
+Mixtral-8x22B-Instruct-V0.1 (zero shot with freeze values),variant,brier,19.243579,17,,,0.205319,18.000000
+GPT-4o (zero shot with freeze values),variant,brier,19.679885,19,,,0.206353,19.000000
+Mistral-Large-Latest (zero shot with freeze values),variant,brier,18.465623,13,,,0.207172,20.000000
+Llama-3-70b-Chat-Hf (zero shot with freeze values),variant,brier,19.848302,21,,,0.207543,21.000000
+Llama-3-70b-Chat-Hf (scratchpad with freeze values),variant,brier,19.762321,20,,,0.207700,22.000000
+Gemini-1.5-Flash (scratchpad with freeze values),variant,brier,21.385642,24,,,0.209086,23.000000
+Claude-2.1 (zero shot with freeze values),variant,brier,21.773908,25,,,0.209289,24.000000
+Gemini-1.5-Flash (zero shot with freeze values),variant,brier,18.857458,16,,,0.213648,25.000000
+Mixtral-8x7B-Instruct-V0.1 (scratchpad with freeze values),variant,brier,20.779321,23,,,0.231013,26.000000
+Llama-3-8b-Chat-Hf (scratchpad with freeze values),variant,brier,22.942113,28,,,0.235254,27.000000
+Claude-2.1 (scratchpad with freeze values),variant,brier,22.796547,27,,,0.243103,28.000000
+Claude-3-Haiku-20240307 (scratchpad with freeze values),variant,brier,23.983830,30,,,0.243503,29.000000
+Llama-2-70b-Chat-Hf (scratchpad with freeze values),variant,brier,23.622071,29,,,0.250133,30.000000
+Llama-2-70b-Chat-Hf (zero shot with freeze values),variant,brier,24.057405,31,,,0.258195,31.000000
+GPT-3.5-Turbo-0125 (scratchpad with freeze values),variant,brier,25.475887,32,,,0.264191,32.000000
+Claude-3-Haiku-20240307 (zero shot with freeze values),variant,brier,29.842585,33,,,0.284118,33.000000
+GPT-3.5-Turbo-0125 (zero shot with freeze values),variant,brier,40.999544,34,,,0.397350,34.000000
+public median,human median,brier,15.754037,3,1.000000,10.000000,,
+superforecaster median,human median,brier,12.102891,1,1.000000,1.000000,,
+mean individual superforecaster,reference line,brier,11.243105,1,,,,
+mean individual public forecaster,reference line,brier,23.222393,29,,,,
